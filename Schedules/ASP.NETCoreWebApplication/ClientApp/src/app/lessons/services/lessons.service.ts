@@ -69,7 +69,7 @@ export class LessonsService extends BaseService{
   public getTimetables<ApiResult>(pageIndex: number, pageSize: number,
                                   sortColumn: string, sortOrder: string,
                                   filterColumn: string, filterQuery: string): Observable<ApiResult> {
-    const url = this.baseUrl + 'api/Timetables';
+    const url = this.baseUrl + 'api/timetables';
     let params = new HttpParams()
       .set("pageIndex", pageIndex.toString())
       .set("pageSize", pageSize.toString())

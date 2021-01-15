@@ -34,9 +34,6 @@ import { TimetableEditComponent } from './timetables/components/timetable-edit.c
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule,
-    AngularMaterialModule,
-    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'auditories', component: AuditoriesComponent },
@@ -48,7 +45,10 @@ import { TimetableEditComponent } from './timetables/components/timetable-edit.c
       { path: 'timetables', component: TimetablesComponent },
       { path: 'timetable/:id', component: TimetableEditComponent },
       { path: 'timetable', component: TimetableEditComponent },
-    ])
+    ]),
+    BrowserAnimationsModule,
+    AngularMaterialModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

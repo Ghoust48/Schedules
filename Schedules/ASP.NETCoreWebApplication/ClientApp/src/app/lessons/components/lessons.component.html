@@ -49,7 +49,7 @@
   <ng-container matColumnDef="time">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
     <td mat-cell *matCellDef="let lesson">
-      <a [routerLink]="['/auditory', lesson.timetableId]">{{lesson.startTime}} - {{lesson.endTime}}</a>
+      <a [routerLink]="['/timetable', lesson.timetableId]">{{lesson.startTime}} - {{lesson.endTime}}</a>
     </td>
   </ng-container>
 

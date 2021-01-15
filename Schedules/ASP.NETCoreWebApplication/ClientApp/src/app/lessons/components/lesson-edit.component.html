@@ -29,22 +29,24 @@
     </div>
 
     <div class="form-group">
-      <!--<label for="auditoryId">Auditory:</label>-->
-      <!--<br />-->
-      <mat-form-field *ngIf="auditories" appearance="fill">
-        <mat-label>Select a Auditory...</mat-label>
-        <mat-select id="auditoryId" formControlName="auditoryId">
-          <mat-option *ngFor="let auditory of auditories" [value]="auditory.id">
-            {{auditory.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
 
-      <div *ngIf="hasError('auditoryId')"
-           class="invalid-feedback">
-        <div *ngIf="form.get('auditoryId').errors?.required">
-          Please select a Auditory.
-        </div>
+    </div>
+
+    <!--<label for="auditoryId">Auditory:</label>-->
+    <!--<br />-->
+    <mat-form-field *ngIf="auditories" appearance="fill">
+      <mat-label>Select a Auditory...</mat-label>
+      <mat-select id="auditoryId" formControlName="auditoryId">
+        <mat-option *ngFor="let auditory of auditories" [value]="auditory.id">
+          {{auditory.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="hasError('auditoryId')"
+         class="invalid-feedback">
+      <div *ngIf="form.get('auditoryId').errors?.required">
+        Please select a Auditory.
       </div>
     </div>
 

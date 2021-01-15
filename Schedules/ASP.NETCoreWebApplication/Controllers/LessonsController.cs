@@ -38,6 +38,7 @@ namespace ASP.NETCoreWebApplication.Controllers
                     Name = lesson.Name,
                     AuditoryId = lesson.Auditory.Id,
                     Auditory = lesson.Auditory.Name,
+                    TimetableId = lesson.Timetable.Id,
                     StartTime = lesson.Timetable.StartTime,
                     EndTime = lesson.Timetable.EndTime,
                 }),
