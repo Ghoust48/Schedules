@@ -1,0 +1,49 @@
+﻿<h1>Auditories</h1>
+
+<p>Here's a list of countries: feel free to play with it.</p>
+
+<p *ngIf="!auditories"><em>Loading...</em></p>
+
+<div class="commands text-right" *ngIf="auditories">
+  <button type="button"
+          [routerLink]="['/auditory']"
+          class="btn btn-success">
+    Add a new Country
+  </button>
+</div>
+
+<mat-form-field [hidden]="!auditories">
+  <label>
+    <input matInput (keyup)="loadData($event.target.value)"
+           placeholder="Filter by name (or part of it)...">
+  </label>
+</mat-form-field>
+
+<table mat-table [dataSource]="auditories" class="mat-elevation-z8" [hidden]="!auditories"
+       matSort (matSortChange)="loadData()"
+       matSortActive="{{defaultSortColumn}}" matSortDirection="{{defaultSortOrder}}">
+
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+    <td mat-cell *matCellDef="let auditory"> {{auditory.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+    <td mat-cell *matCellDef="let auditory">
+      <a [routerLink]="['/auditory', auditory.id]">{{auditory.name}}</a>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<!-- Pagination directive -->
+<mat-paginator [hidden]="!auditories"
+               (page)="getData($event)"
+               [pageSize]="10"
+               [pageSizeOptions]="[10, 20, 50]"
+               showFirstLastButtons></mat-paginator>

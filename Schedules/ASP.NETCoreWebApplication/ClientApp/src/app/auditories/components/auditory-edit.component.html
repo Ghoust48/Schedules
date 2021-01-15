@@ -1,0 +1,46 @@
+﻿<div class="auditory-edit">
+  <h1>{{title}}</h1>
+
+  <p *ngIf="this.id && !auditory"><em>Loading...</em></p>
+
+  <div class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="name">Auditory name:</label>
+      <br />
+      <input type="text" id="name"
+             formControlName="name" required
+             placeholder="Auditory name..."
+             class="form-control"
+      />
+
+      <div *ngIf="form.get('name').invalid &&
+                 (form.get('name').dirty || form.get('name').touched)"
+           class="invalid-feedback">
+        <div *ngIf="form.get('name').errors?.required">
+          Name is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group commands">
+      <button *ngIf="id" type="submit"
+              (click)="onSubmit()"
+              [disabled]="form.invalid"
+              class="btn btn-success">
+        Save
+      </button>
+      <button *ngIf="!id" type="submit"
+              (click)="onSubmit()"
+              [disabled]="form.invalid"
+              class="btn btn-success">
+        Create
+      </button>
+      <button type="button"
+              [routerLink]="['/auditories']"
+              class="btn">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

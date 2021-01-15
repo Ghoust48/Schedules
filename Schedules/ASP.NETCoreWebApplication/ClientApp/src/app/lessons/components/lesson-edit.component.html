@@ -1,0 +1,92 @@
+﻿<div class="lesson-edit">
+  <h1>{{title}}</h1>
+
+  <p *ngIf="this.id && !lesson"><em>Loading...</em></p>
+
+  <div class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!--<div *ngIf="form.invalid"
+         class="alert alert-danger">
+      <strong>ERROR</strong>:
+      A city with the same <i>name</i> and <i>country</i> already exists.
+    </div>-->
+
+    <div class="form-group">
+      <label for="name">Lesson name:</label>
+      <br />
+      <input type="text" id="name"
+             formControlName="name" required
+             placeholder="Lesson name..."
+             class="form-control"
+      />
+
+      <div *ngIf="hasError('name')"
+           class="invalid-feedback">
+        <div *ngIf="form.get('name').errors?.required">
+          Name is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <!--<label for="auditoryId">Auditory:</label>-->
+      <!--<br />-->
+      <mat-form-field *ngIf="auditories" appearance="fill">
+        <mat-label>Select a Auditory...</mat-label>
+        <mat-select id="auditoryId" formControlName="auditoryId">
+          <mat-option *ngFor="let auditory of auditories" [value]="auditory.id">
+            {{auditory.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="hasError('auditoryId')"
+           class="invalid-feedback">
+        <div *ngIf="form.get('auditoryId').errors?.required">
+          Please select a Auditory.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <!--<label for="auditoryId">Auditory:</label>-->
+      <!--<br />-->
+      <mat-form-field *ngIf="timetables" appearance="fill">
+        <mat-label>Select a Time...</mat-label>
+        <mat-select id="timetableId" formControlName="timetableId">
+          <mat-option *ngFor="let timetable of timetables" [value]="timetable.id">
+            {{timetable.startTime}} - {{timetable.endTime}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="hasError('timetableId')"
+           class="invalid-feedback">
+        <div *ngIf="form.get('timetableId').errors?.required">
+          Please select a time.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group commands">
+      <button *ngIf="id" type="submit"
+              (click)="onSubmit()"
+              [disabled]="form.invalid"
+              class="btn btn-success">
+        Save
+      </button>
+      <button *ngIf="!id" type="submit"
+              (click)="onSubmit()"
+              [disabled]="form.invalid"
+              class="btn btn-success">
+        Create
+      </button>
+      <button type="button"
+              [routerLink]="['/lessons']"
+              class="btn">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+

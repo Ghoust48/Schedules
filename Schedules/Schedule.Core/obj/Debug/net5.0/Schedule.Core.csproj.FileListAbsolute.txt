@@ -1,0 +1,12 @@
+D:\Projects\С#\Schedules\Schedule.Core\bin\Debug\net5.0\Schedule.Core.deps.json
+D:\Projects\С#\Schedules\Schedule.Core\bin\Debug\net5.0\Schedule.Core.dll
+D:\Projects\С#\Schedules\Schedule.Core\bin\Debug\net5.0\ref\Schedule.Core.dll
+D:\Projects\С#\Schedules\Schedule.Core\bin\Debug\net5.0\Schedule.Core.pdb
+D:\Projects\С#\Schedules\Schedule.Core\obj\Debug\net5.0\Schedule.Core.csprojAssemblyReference.cache
+D:\Projects\С#\Schedules\Schedule.Core\obj\Debug\net5.0\Schedule.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\С#\Schedules\Schedule.Core\obj\Debug\net5.0\Schedule.Core.AssemblyInfoInputs.cache
+D:\Projects\С#\Schedules\Schedule.Core\obj\Debug\net5.0\Schedule.Core.AssemblyInfo.cs
+D:\Projects\С#\Schedules\Schedule.Core\obj\Debug\net5.0\Schedule.Core.csproj.CoreCompileInputs.cache
+D:\Projects\С#\Schedules\Schedule.Core\obj\Debug\net5.0\Schedule.Core.dll
+D:\Projects\С#\Schedules\Schedule.Core\obj\Debug\net5.0\ref\Schedule.Core.dll
+D:\Projects\С#\Schedules\Schedule.Core\obj\Debug\net5.0\Schedule.Core.pdb
