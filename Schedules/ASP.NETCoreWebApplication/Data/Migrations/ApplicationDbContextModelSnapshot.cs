@@ -46,14 +46,19 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TimeTableId")
+                    b.Property<int>("TimetableId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeeksTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AuditoryId");
 
-                    b.HasIndex("TimeTableId");
+                    b.HasIndex("TimetableId");
+
+                    b.HasIndex("WeeksTypeId");
 
                     b.ToTable("Lessons");
                 });
@@ -76,6 +81,21 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                     b.ToTable("Timetables");
                 });
 
+            modelBuilder.Entity("ASP.NETCoreWebApplication.Models.WeeksType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WeeksTypes");
+                });
+
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Lesson", b =>
                 {
                     b.HasOne("ASP.NETCoreWebApplication.Models.Auditory", "Auditory")
@@ -86,13 +106,21 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
 
                     b.HasOne("ASP.NETCoreWebApplication.Models.Timetable", "Timetable")
                         .WithMany("Lessons")
-                        .HasForeignKey("TimeTableId")
+                        .HasForeignKey("TimetableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ASP.NETCoreWebApplication.Models.WeeksType", "WeeksType")
+                        .WithMany("Lessons")
+                        .HasForeignKey("WeeksTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Auditory");
 
                     b.Navigation("Timetable");
+
+                    b.Navigation("WeeksType");
                 });
 
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Auditory", b =>
@@ -101,6 +129,11 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                 });
 
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Timetable", b =>
+                {
+                    b.Navigation("Lessons");
+                });
+
+            modelBuilder.Entity("ASP.NETCoreWebApplication.Models.WeeksType", b =>
                 {
                     b.Navigation("Lessons");
                 });

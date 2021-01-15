@@ -17,5 +17,9 @@ namespace ASP.NETCoreWebApplication.Models.DTOs
         public string StartTime { get; set; }
 
         public string EndTime { get; set; }
+
+        public int WeeksTypeId { get; set; }
+
+        public string WeeksType { get; set; }
     }
 }

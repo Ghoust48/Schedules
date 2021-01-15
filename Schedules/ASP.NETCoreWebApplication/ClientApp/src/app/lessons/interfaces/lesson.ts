@@ -6,4 +6,6 @@
   timetableId: number;
   startTime: string;
   endTime: string;
+  weeksTypeId: number;
+  weeksType: string;
 }

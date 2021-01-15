@@ -8440,19 +8440,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\islepukhin\\.nuget\\packages\\": {}
+    "C:\\Users\\slepu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Web\\Schedule.Web.csproj",
+      "projectUniqueName": "C:\\Users\\slepu\\Desktop\\Project\\Schedules\\Schedules\\Schedule.Web\\Schedule.Web.csproj",
       "projectName": "Schedule.Web",
-      "projectPath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Web\\Schedule.Web.csproj",
-      "packagesPath": "C:\\Users\\islepukhin\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Web\\obj\\",
+      "projectPath": "C:\\Users\\slepu\\Desktop\\Project\\Schedules\\Schedules\\Schedule.Web\\Schedule.Web.csproj",
+      "packagesPath": "C:\\Users\\slepu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\slepu\\Desktop\\Project\\Schedules\\Schedules\\Schedule.Web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\islepukhin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\slepu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8466,8 +8466,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj": {
-              "projectPath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj"
+            "C:\\Users\\slepu\\Desktop\\Project\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\slepu\\Desktop\\Project\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj"
             }
           }
         }
@@ -8545,7 +8545,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

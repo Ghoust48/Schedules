@@ -10,8 +10,12 @@
 
         public virtual Auditory Auditory { get; set; }
 
-        public int TimeTableId { get; set; }
+        public int TimetableId { get; set; }
 
         public virtual Timetable Timetable { get; set; }
+
+        public int WeeksTypeId { get; set; }
+        
+        public virtual WeeksType WeeksType { get; set; }
     }
 }

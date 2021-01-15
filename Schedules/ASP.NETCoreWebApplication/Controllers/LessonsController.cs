@@ -41,6 +41,8 @@ namespace ASP.NETCoreWebApplication.Controllers
                     TimetableId = lesson.Timetable.Id,
                     StartTime = lesson.Timetable.StartTime,
                     EndTime = lesson.Timetable.EndTime,
+                    WeeksTypeId = lesson.WeeksType.Id,
+                    WeeksType = lesson.WeeksType.Type
                 }),
                 pageIndex,
                 pageSize,

@@ -34,7 +34,7 @@ namespace ASP.NETCoreWebApplication.Data
 
         public DbSet<Timetable> Timetables { get; set; }
 
-        //public DbSet<WeeksType> WeeksTypes { get; set; }
+        public DbSet<WeeksType> WeeksTypes { get; set; }
 
         public DbSet<Auditory> Auditories { get; set; }
     }

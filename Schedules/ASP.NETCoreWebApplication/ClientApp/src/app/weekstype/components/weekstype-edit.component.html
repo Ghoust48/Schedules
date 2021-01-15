@@ -1,0 +1,46 @@
+<div class="timetable-edit">
+  <h1>{{title}}</h1>
+
+  <p *ngIf="this.id && !weeksType"><em>Loading...</em></p>
+
+  <div class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="type">Type:</label>
+      <br />
+      <input type="text" id="type"
+             formControlName="type" required
+             placeholder="Type..."
+             class="form-control"
+      />
+
+      <div *ngIf="form.get('type').invalid &&
+                 (form.get('type').dirty || form.get('type').touched)"
+           class="invalid-feedback">
+        <div *ngIf="form.get('type').errors?.required">
+          type is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group commands">
+      <button *ngIf="id" type="submit"
+              (click)="onSubmit()"
+              [disabled]="form.invalid"
+              class="btn btn-success">
+        Save
+      </button>
+      <button *ngIf="!id" type="submit"
+              (click)="onSubmit()"
+              [disabled]="form.invalid"
+              class="btn btn-success">
+        Create
+      </button>
+      <button type="button"
+              [routerLink]="['/weekstype']"
+              class="btn">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

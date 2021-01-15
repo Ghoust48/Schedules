@@ -70,6 +70,26 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <!--<label for="auditoryId">Auditory:</label>-->
+      <!--<br />-->
+      <mat-form-field *ngIf="weeksTypes" appearance="fill">
+        <mat-label>Select a Weeks Type...</mat-label>
+        <mat-select id="weeksTypeId" formControlName="weeksTypeId">
+          <mat-option *ngFor="let weeksType of weeksTypes" [value]="weeksType.id">
+            {{weeksType.type}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="hasError('weeksTypeId')"
+           class="invalid-feedback">
+        <div *ngIf="form.get('weeksTypeId').errors?.required">
+          Please select a weeksType.
+        </div>
+      </div>
+    </div>
+
     <div class="form-group commands">
       <button *ngIf="id" type="submit"
               (click)="onSubmit()"

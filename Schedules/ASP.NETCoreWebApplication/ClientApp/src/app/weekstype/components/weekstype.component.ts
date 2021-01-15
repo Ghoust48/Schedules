@@ -1,42 +1,35 @@
-﻿import {Component, OnInit, ViewChild} from "@angular/core";
-import {Lesson} from "../interfaces/lesson";
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-import {MatSort} from "@angular/material/sort";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {LessonsService} from "../services/lessons.service";
+import {MatSort} from "@angular/material/sort";
+import {WeeksType} from "../interfaces/weeksType";
+import {WeekstypeService} from "../services/weekstype.service";
 import {ApiResult} from "../../base.service";
 
 @Component({
-  selector: 'app-lessons',
-  templateUrl: './lessons.component.html',
-  styleUrls: ['./lessons.component.css']
+  selector: 'app-weekstype',
+  templateUrl: './weekstype.component.html',
+  styleUrls: ['./weekstype.component.css']
 })
-export class LessonsComponent implements OnInit{
+export class WeekstypeComponent implements OnInit {
 
-  private _displayedColumns: string[] = ['id', 'name', 'auditory', 'time', 'weeksType'];
-
-  private _lessons: MatTableDataSource<Lesson>;
+  private _displayedColumns: string[] = ['id', 'type'];
+  private _weeksType: MatTableDataSource<WeeksType>;
 
   private _defaultPageIndex: number = 0;
-
   private _defaultPageSize: number = 10;
-
-  private _defaultSortColumn: string = "name";
-
+  private _defaultSortColumn: string = "type";
   private _defaultSortOrder: string = "asc";
 
-  private _defaultFilterColumn: string = "name";
-
-  private _filterQuery:string = null;
+  private _defaultFilterColumn: string = "type";
+  private _filterQuery: string = null;
 
   @ViewChild(MatPaginator) private _paginator: MatPaginator;
-
   @ViewChild(MatSort) private _sort: MatSort;
 
-  constructor(private _lessonsService: LessonsService) {
-  }
+  constructor(private _weekstypeService: WeekstypeService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadData(null);
   }
 
@@ -52,7 +45,8 @@ export class LessonsComponent implements OnInit{
     this.getData(pageEvent);
   }
 
-  public getData(pageEvent: PageEvent) {
+  public getData(event: PageEvent) {
+
     const sortColumn = (this.sort)
       ? this.sort.active
       : this.defaultSortColumn;
@@ -61,17 +55,17 @@ export class LessonsComponent implements OnInit{
       ? this.sort.direction
       : this.defaultSortOrder;
 
-    const filterColumn = (this._filterQuery)
+    const filterColumn = (this.filterQuery)
       ? this.defaultFilterColumn
       : null;
 
-    const filterQuery = (this._filterQuery)
+    const filterQuery = (this.filterQuery)
       ? this.filterQuery
       : null;
 
-    this._lessonsService.getData<ApiResult<Lesson>>(
-      pageEvent.pageIndex,
-      pageEvent.pageSize,
+    this._weekstypeService.getData<ApiResult<WeeksType>>(
+      event.pageIndex,
+      event.pageSize,
       sortColumn,
       sortOrder,
       filterColumn,
@@ -80,66 +74,8 @@ export class LessonsComponent implements OnInit{
         this.paginator.length = result.totalCount;
         this.paginator.pageIndex = result.pageIndex;
         this.paginator.pageSize = result.pageSize;
-        this.lessons = new MatTableDataSource<Lesson>(result.data);
+        this.weeksType = new MatTableDataSource<WeeksType>(result.data);
       }, error => console.error(error));
-  }
-
-  get defaultSortOrder(): string {
-    return this._defaultSortOrder;
-  }
-
-  set defaultSortOrder(value: string) {
-    this._defaultSortOrder = value;
-  }
-  get defaultSortColumn(): string {
-    return this._defaultSortColumn;
-  }
-
-  set defaultSortColumn(value: string) {
-    this._defaultSortColumn = value;
-  }
-  get lessons(): MatTableDataSource<Lesson> {
-    return this._lessons;
-  }
-
-  set lessons(value: MatTableDataSource<Lesson>) {
-    this._lessons = value;
-  }
-  get displayedColumns(): string[] {
-    return this._displayedColumns;
-  }
-
-  set displayedColumns(value: string[]) {
-    this._displayedColumns = value;
-  }
-
-  get filterQuery(): string {
-    return this._filterQuery;
-  }
-
-  set filterQuery(value: string) {
-    this._filterQuery = value;
-  }
-  get defaultFilterColumn(): string {
-    return this._defaultFilterColumn;
-  }
-
-  set defaultFilterColumn(value: string) {
-    this._defaultFilterColumn = value;
-  }
-  get defaultPageSize(): number {
-    return this._defaultPageSize;
-  }
-
-  set defaultPageSize(value: number) {
-    this._defaultPageSize = value;
-  }
-  get defaultPageIndex(): number {
-    return this._defaultPageIndex;
-  }
-
-  set defaultPageIndex(value: number) {
-    this._defaultPageIndex = value;
   }
 
   get sort(): MatSort {
@@ -155,5 +91,61 @@ export class LessonsComponent implements OnInit{
 
   set paginator(value: MatPaginator) {
     this._paginator = value;
+  }
+  get filterQuery(): string {
+    return this._filterQuery;
+  }
+
+  set filterQuery(value: string) {
+    this._filterQuery = value;
+  }
+  get defaultFilterColumn(): string {
+    return this._defaultFilterColumn;
+  }
+
+  set defaultFilterColumn(value: string) {
+    this._defaultFilterColumn = value;
+  }
+  get defaultSortOrder(): string {
+    return this._defaultSortOrder;
+  }
+
+  set defaultSortOrder(value: string) {
+    this._defaultSortOrder = value;
+  }
+  get defaultSortColumn(): string {
+    return this._defaultSortColumn;
+  }
+
+  set defaultSortColumn(value: string) {
+    this._defaultSortColumn = value;
+  }
+  get defaultPageSize(): number {
+    return this._defaultPageSize;
+  }
+
+  set defaultPageSize(value: number) {
+    this._defaultPageSize = value;
+  }
+  get defaultPageIndex(): number {
+    return this._defaultPageIndex;
+  }
+
+  set defaultPageIndex(value: number) {
+    this._defaultPageIndex = value;
+  }
+  get weeksType(): MatTableDataSource<WeeksType> {
+    return this._weeksType;
+  }
+
+  set weeksType(value: MatTableDataSource<WeeksType>) {
+    this._weeksType = value;
+  }
+  get displayedColumns(): string[] {
+    return this._displayedColumns;
+  }
+
+  set displayedColumns(value: string[]) {
+    this._displayedColumns = value;
   }
 }

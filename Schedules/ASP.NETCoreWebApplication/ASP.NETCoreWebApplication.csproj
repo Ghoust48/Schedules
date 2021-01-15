@@ -33,9 +33,6 @@
       <Folder Include="ClientApp\src\app\daysweek\components" />
       <Folder Include="ClientApp\src\app\daysweek\interfaces" />
       <Folder Include="ClientApp\src\app\daysweek\services" />
-      <Folder Include="ClientApp\src\app\weekstype\components" />
-      <Folder Include="ClientApp\src\app\weekstype\interfaces" />
-      <Folder Include="ClientApp\src\app\weekstype\services" />
       <Folder Include="Data\Migrations" />
     </ItemGroup>
 

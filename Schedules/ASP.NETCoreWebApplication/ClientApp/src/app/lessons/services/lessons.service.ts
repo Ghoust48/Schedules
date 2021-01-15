@@ -1,5 +1,5 @@
 ﻿import {Inject, Injectable} from "@angular/core";
-import {BaseService} from "../../base.service";
+import {ApiResult, BaseService} from "../../base.service";
 import {Observable} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
 
@@ -46,8 +46,29 @@ export class LessonsService extends BaseService{
     return this.http.put<Lesson>(url, item);
   }
 
+  public getChildrenByUrl<ApiResult>(childUrl: string, pageIndex: number, pageSize: number,
+                                     sortColumn: string, sortOrder: string,
+                                     filterColumn: string, filterQuery: string)
+  {
+    const url = this.baseUrl + `api/${childUrl}`;
+
+    let params = new HttpParams()
+      .set("pageIndex", pageIndex.toString())
+      .set("pageSize", pageSize.toString())
+      .set("sortColumn", sortColumn)
+      .set("sortOrder", sortOrder);
+
+    if (filterQuery) {
+      params = params
+        .set("filterColumn", filterColumn)
+        .set("filterQuery", filterQuery);
+    }
+
+    return this.http.get<ApiResult>(url, { params });
+  }
+
   //TODO: Сделать универсальный метод
-  public getAuditories<ApiResult>(pageIndex: number, pageSize: number,
+  /*public getAuditories<ApiResult>(pageIndex: number, pageSize: number,
                                   sortColumn: string, sortOrder: string,
                                   filterColumn: string, filterQuery: string): Observable<ApiResult> {
     const url = this.baseUrl + 'api/auditories';
@@ -83,5 +104,5 @@ export class LessonsService extends BaseService{
     }
 
     return this.http.get<ApiResult>(url, { params });
-  }
+  }*/
 }
