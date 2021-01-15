@@ -36,6 +36,7 @@
       <Folder Include="ClientApp\src\app\weekstype\components" />
       <Folder Include="ClientApp\src\app\weekstype\interfaces" />
       <Folder Include="ClientApp\src\app\weekstype\services" />
+      <Folder Include="Data\Migrations" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

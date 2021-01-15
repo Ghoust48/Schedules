@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASP.NETCoreWebApplication.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210109042355_Init")]
+    [Migration("20210115101546_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,11 +48,34 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TimeTableId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AuditoryId");
 
+                    b.HasIndex("TimeTableId");
+
                     b.ToTable("Lessons");
+                });
+
+            modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Timetable", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("EndTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StartTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Timetables");
                 });
 
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Lesson", b =>
@@ -63,10 +86,23 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ASP.NETCoreWebApplication.Models.Timetable", "Timetable")
+                        .WithMany("Lessons")
+                        .HasForeignKey("TimeTableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Auditory");
+
+                    b.Navigation("Timetable");
                 });
 
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Auditory", b =>
+                {
+                    b.Navigation("Lessons");
+                });
+
+            modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Timetable", b =>
                 {
                     b.Navigation("Lessons");
                 });

@@ -47,6 +47,7 @@ export class LessonEditComponent extends BaseFormComponent implements OnInit{
   public loadData() {
     // load auditories
     this.loadAuditories();
+    this.loadTimetables();
 
     // retrieve the ID from the 'id'
     this.id = +this._activatedRoute.snapshot.paramMap.get('id');
@@ -83,10 +84,10 @@ export class LessonEditComponent extends BaseFormComponent implements OnInit{
   }
 
   public loadTimetables() {
-    this._lessonsService.getAuditories<ApiResult<Timetable>>(
+    this._lessonsService.getTimetables<ApiResult<Timetable>>(
       0,
       9999,
-      "name",
+      "startTime",
       null,
       null,
       null,
