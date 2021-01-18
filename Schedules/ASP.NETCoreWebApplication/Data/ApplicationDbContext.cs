@@ -30,7 +30,7 @@ namespace ASP.NETCoreWebApplication.Data
 
         public DbSet<Lesson> Lessons { get; set; }
 
-       // public DbSet<DaysWeek> DaysWeeks { get; set; }
+        public DbSet<DaysWeek> DaysWeeks { get; set; }
 
         public DbSet<Timetable> Timetables { get; set; }
 

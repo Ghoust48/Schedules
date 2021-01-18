@@ -13,7 +13,7 @@ import {ApiResult} from "../../base.service";
 })
 export class LessonsComponent implements OnInit{
 
-  private _displayedColumns: string[] = ['id', 'name', 'auditory', 'time', 'weeksType'];
+  private _displayedColumns: string[] = ['id', 'name', 'auditory', 'time', 'weeksType', 'daysWeek'];
 
   private _lessons: MatTableDataSource<Lesson>;
 

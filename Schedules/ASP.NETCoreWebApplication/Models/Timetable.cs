@@ -19,7 +19,6 @@ namespace ASP.NETCoreWebApplication.Models
 
         public string EndTime { get; set; }
         
-        
         public virtual IEnumerable<Lesson> Lessons { get; set; }
     }
 }

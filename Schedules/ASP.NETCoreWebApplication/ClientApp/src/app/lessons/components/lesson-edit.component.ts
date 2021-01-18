@@ -8,6 +8,7 @@ import {ApiResult} from "../../base.service";
 import {Auditory} from "../../auditories/interfaces/auditory";
 import {Timetable} from "../../timetables/interfaces/timetable";
 import {WeeksType} from "../../weekstype/interfaces/weeksType";
+import {DaysWeek} from "../../daysweek/interfaces/days-week";
 
 @Component({
   selector: 'app-lesson-edit',
@@ -15,6 +16,7 @@ import {WeeksType} from "../../weekstype/interfaces/weeksType";
   styleUrls: ['./lesson-edit.component.css']
 })
 export class LessonEditComponent extends BaseFormComponent implements OnInit{
+
 
   private _title: string;
 
@@ -30,6 +32,8 @@ export class LessonEditComponent extends BaseFormComponent implements OnInit{
 
   private _weeksTypes: WeeksType[];
 
+  private _daysWeeks: DaysWeek[];
+
   private _activityLog: string = '';
 
   constructor(private _activatedRoute: ActivatedRoute, private _router: Router,
@@ -43,6 +47,7 @@ export class LessonEditComponent extends BaseFormComponent implements OnInit{
       auditoryId: new FormControl('', Validators.required),
       timetableId: new FormControl('', Validators.required),
       weeksTypeId: new FormControl('', Validators.required),
+      daysWeekId: new FormControl('', Validators.required),
     });
 
     this.loadData();
@@ -53,6 +58,7 @@ export class LessonEditComponent extends BaseFormComponent implements OnInit{
     this.loadAuditories();
     this.loadTimetables();
     this.loadWeeksType();
+    this.loadDaysWeek();
 
     // retrieve the ID from the 'id'
     this.id = +this._activatedRoute.snapshot.paramMap.get('id');
@@ -86,6 +92,20 @@ export class LessonEditComponent extends BaseFormComponent implements OnInit{
       null,
     ).subscribe(result => {
       this.auditories = result.data;
+    }, error => console.error(error));
+  }
+
+  public loadDaysWeek() {
+    this._lessonsService.getChildrenByUrl<ApiResult<DaysWeek>>(
+      "daysweeks",
+      0,
+      9999,
+      "day",
+      null,
+      null,
+      null,
+    ).subscribe(result => {
+      this.daysWeeks = result.data;
     }, error => console.error(error));
   }
 
@@ -125,6 +145,8 @@ export class LessonEditComponent extends BaseFormComponent implements OnInit{
     lesson.auditoryId = +this.form.get("auditoryId").value;
     lesson.timetableId = +this.form.get("timetableId").value;
     lesson.weeksTypeId = +this.form.get("weeksTypeId").value;
+    lesson.daysWeekId = +this.form.get("daysWeekId").value;
+
 
     if (this.id) {
       // EDIT mode
@@ -210,4 +232,12 @@ export class LessonEditComponent extends BaseFormComponent implements OnInit{
   set weeksTypes(value: WeeksType[]) {
     this._weeksTypes = value;
   }
+  get daysWeeks(): DaysWeek[] {
+    return this._daysWeeks;
+  }
+
+  set daysWeeks(value: DaysWeek[]) {
+    this._daysWeeks = value;
+  }
+
 }

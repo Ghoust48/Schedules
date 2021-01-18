@@ -33,6 +33,21 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                     b.ToTable("Auditories");
                 });
 
+            modelBuilder.Entity("ASP.NETCoreWebApplication.Models.DaysWeek", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Day")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DaysWeeks");
+                });
+
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Lesson", b =>
                 {
                     b.Property<int>("Id")
@@ -41,6 +56,9 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                         .UseIdentityColumn();
 
                     b.Property<int>("AuditoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DaysWeekId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -55,6 +73,8 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AuditoryId");
+
+                    b.HasIndex("DaysWeekId");
 
                     b.HasIndex("TimetableId");
 
@@ -104,6 +124,12 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ASP.NETCoreWebApplication.Models.DaysWeek", "DaysWeek")
+                        .WithMany("Lessons")
+                        .HasForeignKey("DaysWeekId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ASP.NETCoreWebApplication.Models.Timetable", "Timetable")
                         .WithMany("Lessons")
                         .HasForeignKey("TimetableId")
@@ -118,12 +144,19 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
 
                     b.Navigation("Auditory");
 
+                    b.Navigation("DaysWeek");
+
                     b.Navigation("Timetable");
 
                     b.Navigation("WeeksType");
                 });
 
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Auditory", b =>
+                {
+                    b.Navigation("Lessons");
+                });
+
+            modelBuilder.Entity("ASP.NETCoreWebApplication.Models.DaysWeek", b =>
                 {
                     b.Navigation("Lessons");
                 });

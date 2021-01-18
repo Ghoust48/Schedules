@@ -42,7 +42,9 @@ namespace ASP.NETCoreWebApplication.Controllers
                     StartTime = lesson.Timetable.StartTime,
                     EndTime = lesson.Timetable.EndTime,
                     WeeksTypeId = lesson.WeeksType.Id,
-                    WeeksType = lesson.WeeksType.Type
+                    WeeksType = lesson.WeeksType.Type,
+                    DaysWeekId = lesson.DaysWeek.Id,
+                    DaysWeek = lesson.DaysWeek.Day
                 }),
                 pageIndex,
                 pageSize,

@@ -30,9 +30,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ClientApp\src\app\daysweek\components" />
-      <Folder Include="ClientApp\src\app\daysweek\interfaces" />
-      <Folder Include="ClientApp\src\app\daysweek\services" />
       <Folder Include="Data\Migrations" />
     </ItemGroup>
 

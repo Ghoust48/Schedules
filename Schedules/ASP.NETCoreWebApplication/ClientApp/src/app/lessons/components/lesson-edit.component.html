@@ -90,6 +90,26 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <!--<label for="auditoryId">Auditory:</label>-->
+      <!--<br />-->
+      <mat-form-field *ngIf="daysWeeks" appearance="fill">
+        <mat-label>Select a Weeks Type...</mat-label>
+        <mat-select id="daysWeekId" formControlName="daysWeekId">
+          <mat-option *ngFor="let daysWeek of daysWeeks" [value]="daysWeek.id">
+            {{daysWeek.day}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="hasError('daysWeekId')"
+           class="invalid-feedback">
+        <div *ngIf="form.get('daysWeekId').errors?.required">
+          Please select a days Week.
+        </div>
+      </div>
+    </div>
+
     <div class="form-group commands">
       <button *ngIf="id" type="submit"
               (click)="onSubmit()"

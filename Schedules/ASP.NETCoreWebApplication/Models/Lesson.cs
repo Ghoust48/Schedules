@@ -17,5 +17,9 @@
         public int WeeksTypeId { get; set; }
         
         public virtual WeeksType WeeksType { get; set; }
+        
+        public int DaysWeekId { get; set; }
+
+        public DaysWeek DaysWeek { get; set; }
     }
 }

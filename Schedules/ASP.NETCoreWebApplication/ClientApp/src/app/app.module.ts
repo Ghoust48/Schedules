@@ -18,6 +18,8 @@ import { TimetablesComponent } from "./timetables/components/timetables.componen
 import { TimetableEditComponent } from './timetables/components/timetable-edit.component';
 import { WeekstypeComponent } from './weekstype/components/weekstype.component';
 import { WeekstypeEditComponent } from './weekstype/components/weekstype-edit.component';
+import { DaysWeekComponent } from './daysweek/components/days-week.component';
+import { DaysWeekEditComponent } from './daysweek/components/days-week-edit.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { WeekstypeEditComponent } from './weekstype/components/weekstype-edit.co
     TimetablesComponent,
     TimetableEditComponent,
     WeekstypeComponent,
-    WeekstypeEditComponent
+    WeekstypeEditComponent,
+    DaysWeekComponent,
+    DaysWeekEditComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -52,6 +56,9 @@ import { WeekstypeEditComponent } from './weekstype/components/weekstype-edit.co
       { path: 'weekstype', component: WeekstypeComponent },
       { path: 'weektype/:id', component: WeekstypeEditComponent },
       { path: 'weektype', component: WeekstypeEditComponent },
+      { path: 'daysweeks', component: DaysWeekComponent },
+      { path: 'daysweek/:id', component: DaysWeekEditComponent },
+      { path: 'daysweek', component: DaysWeekEditComponent },
     ]),
     BrowserAnimationsModule,
     AngularMaterialModule,
