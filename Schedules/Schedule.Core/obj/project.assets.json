@@ -8,19 +8,19 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\slepu\\.nuget\\packages\\": {}
+    "C:\\Users\\islepukhin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\slepu\\Desktop\\Project\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj",
+      "projectUniqueName": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj",
       "projectName": "Schedule.Core",
-      "projectPath": "C:\\Users\\slepu\\Desktop\\Project\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj",
-      "packagesPath": "C:\\Users\\slepu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\slepu\\Desktop\\Project\\Schedules\\Schedules\\Schedule.Core\\obj\\",
+      "projectPath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj",
+      "packagesPath": "C:\\Users\\islepukhin\\.nuget\\packages\\",
+      "outputPath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\slepu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\islepukhin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -60,7 +60,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

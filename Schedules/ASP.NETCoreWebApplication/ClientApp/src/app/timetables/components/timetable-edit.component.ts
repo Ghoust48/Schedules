@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AuditoriesService} from "../../auditories/services/auditories.service";
 import {Timetable} from "../interfaces/timetable";
 import {TimetablesService} from "../services/timetables.service";
+import {TimeValidator} from "../../shared/validators/time.validator";
 
 @Component({
   selector: 'app-timetable-edit',
@@ -39,14 +40,19 @@ export class TimetableEditComponent extends BaseFormComponent implements OnInit 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
       startTime: ['',
-        [Validators.required,
-        Validators.pattern(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/)]
+        [
+          Validators.required,
+          Validators.pattern(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/)
+        ]
       ],
       endTime: ['',
         [Validators.required,
         Validators.pattern(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/)]
       ],
-    });
+    },
+      {
+        validators: TimeValidator('startTime', 'endTime')
+      });
 
     this.loadData();
   }

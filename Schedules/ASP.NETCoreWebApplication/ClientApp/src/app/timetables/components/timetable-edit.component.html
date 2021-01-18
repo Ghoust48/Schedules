@@ -21,7 +21,10 @@
           Start Time is required.
         </div>
         <div *ngIf="form.get('startTime').errors?.pattern">
-          Start Time is not pattern.
+          Start Time is not pattern 'hh:mm'.
+        </div>
+        <div *ngIf="form.get('startTime').errors?.time">
+          Start time can't be more end time!
         </div>
       </div>
     </div>
