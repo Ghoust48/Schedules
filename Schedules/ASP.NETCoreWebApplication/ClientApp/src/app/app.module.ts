@@ -20,6 +20,8 @@ import { WeekstypeComponent } from './weekstype/components/weekstype.component';
 import { WeekstypeEditComponent } from './weekstype/components/weekstype-edit.component';
 import { DaysWeekComponent } from './daysweek/components/days-week.component';
 import { DaysWeekEditComponent } from './daysweek/components/days-week-edit.component';
+import { LessonTypeComponent } from './lesson-type/components/lesson-type.component';
+import { LessonTypeEditComponent } from './lesson-type/components/lesson-type-edit.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { DaysWeekEditComponent } from './daysweek/components/days-week-edit.comp
     WeekstypeComponent,
     WeekstypeEditComponent,
     DaysWeekComponent,
-    DaysWeekEditComponent
+    DaysWeekEditComponent,
+    LessonTypeComponent,
+    LessonTypeEditComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -59,6 +63,9 @@ import { DaysWeekEditComponent } from './daysweek/components/days-week-edit.comp
       { path: 'daysweeks', component: DaysWeekComponent },
       { path: 'daysweek/:id', component: DaysWeekEditComponent },
       { path: 'daysweek', component: DaysWeekEditComponent },
+      { path: 'lessontypes', component: LessonTypeComponent },
+      { path: 'lessontype/:id', component: LessonTypeEditComponent },
+      { path: 'lessontype', component: LessonTypeEditComponent },
     ]),
     BrowserAnimationsModule,
     AngularMaterialModule,

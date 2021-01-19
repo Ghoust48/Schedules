@@ -3,14 +3,16 @@ using ASP.NETCoreWebApplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ASP.NETCoreWebApplication.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210119085819_Added column Color in WeeksType")]
+    partial class AddedcolumnColorinWeeksType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,9 +63,6 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                     b.Property<int>("DaysWeekId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LessonTypeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -79,28 +78,11 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
 
                     b.HasIndex("DaysWeekId");
 
-                    b.HasIndex("LessonTypeId");
-
                     b.HasIndex("TimetableId");
 
                     b.HasIndex("WeeksTypeId");
 
                     b.ToTable("Lessons");
-                });
-
-            modelBuilder.Entity("ASP.NETCoreWebApplication.Models.LessonType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LessonTypes");
                 });
 
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Timetable", b =>
@@ -153,12 +135,6 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ASP.NETCoreWebApplication.Models.LessonType", "LessonType")
-                        .WithMany("Lessons")
-                        .HasForeignKey("LessonTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ASP.NETCoreWebApplication.Models.Timetable", "Timetable")
                         .WithMany("Lessons")
                         .HasForeignKey("TimetableId")
@@ -175,8 +151,6 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
 
                     b.Navigation("DaysWeek");
 
-                    b.Navigation("LessonType");
-
                     b.Navigation("Timetable");
 
                     b.Navigation("WeeksType");
@@ -188,11 +162,6 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                 });
 
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.DaysWeek", b =>
-                {
-                    b.Navigation("Lessons");
-                });
-
-            modelBuilder.Entity("ASP.NETCoreWebApplication.Models.LessonType", b =>
                 {
                     b.Navigation("Lessons");
                 });

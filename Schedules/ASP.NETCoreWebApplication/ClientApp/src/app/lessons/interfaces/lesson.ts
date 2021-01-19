@@ -11,4 +11,6 @@
   weeksColor: string;
   daysWeekId: number;
   daysWeek: string;
+  lessonTypeId: number;
+  lessonType: string;
 }

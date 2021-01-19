@@ -21,5 +21,11 @@
         public int DaysWeekId { get; set; }
 
         public DaysWeek DaysWeek { get; set; }
+
+        public int LessonTypeId { get; set; }
+
+        public LessonType LessonType { get; set; }
+
+        public Subgroup Subgroup { get; set; }
     }
 }

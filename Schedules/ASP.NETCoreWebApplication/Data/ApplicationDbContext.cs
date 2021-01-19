@@ -37,5 +37,7 @@ namespace ASP.NETCoreWebApplication.Data
         public DbSet<WeeksType> WeeksTypes { get; set; }
 
         public DbSet<Auditory> Auditories { get; set; }
+
+        public DbSet<LessonType> LessonTypes { get; set; }
     }
 }

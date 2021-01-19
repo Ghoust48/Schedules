@@ -9,6 +9,7 @@ import {Auditory} from "../../auditories/interfaces/auditory";
 import {Timetable} from "../../timetables/interfaces/timetable";
 import {WeeksType} from "../../weekstype/interfaces/weeksType";
 import {DaysWeek} from "../../daysweek/interfaces/days-week";
+import {LessonType} from "../../lesson-type/interfaces/lesson-type";
 
 @Component({
   selector: 'app-lesson-edit',
@@ -16,7 +17,6 @@ import {DaysWeek} from "../../daysweek/interfaces/days-week";
   styleUrls: ['./lesson-edit.component.css']
 })
 export class LessonEditComponent extends BaseFormComponent implements OnInit{
-
 
   private _title: string;
 
@@ -34,6 +34,8 @@ export class LessonEditComponent extends BaseFormComponent implements OnInit{
 
   private _daysWeeks: DaysWeek[];
 
+  private _lessonTypes: LessonType[];
+
   private _activityLog: string = '';
 
   constructor(private _activatedRoute: ActivatedRoute, private _router: Router,
@@ -48,6 +50,7 @@ export class LessonEditComponent extends BaseFormComponent implements OnInit{
       timetableId: new FormControl('', Validators.required),
       weeksTypeId: new FormControl('', Validators.required),
       daysWeekId: new FormControl('', Validators.required),
+      lessonTypeId: new FormControl('', Validators.required),
     });
 
     this.loadData();
@@ -59,6 +62,7 @@ export class LessonEditComponent extends BaseFormComponent implements OnInit{
     this.loadTimetables();
     this.loadWeeksType();
     this.loadDaysWeek();
+    this.loadLessonTypes();
 
     // retrieve the ID from the 'id'
     this.id = +this._activatedRoute.snapshot.paramMap.get('id');
@@ -92,6 +96,20 @@ export class LessonEditComponent extends BaseFormComponent implements OnInit{
       null,
     ).subscribe(result => {
       this.auditories = result.data;
+    }, error => console.error(error));
+  }
+
+  public loadLessonTypes() {
+    this._lessonsService.getChildrenByUrl<ApiResult<LessonType>>(
+      "lessontypes",
+      0,
+      9999,
+      "type",
+      null,
+      null,
+      null,
+    ).subscribe(result => {
+      this.lessonTypes = result.data;
     }, error => console.error(error));
   }
 
@@ -146,6 +164,7 @@ export class LessonEditComponent extends BaseFormComponent implements OnInit{
     lesson.timetableId = +this.form.get("timetableId").value;
     lesson.weeksTypeId = +this.form.get("weeksTypeId").value;
     lesson.daysWeekId = +this.form.get("daysWeekId").value;
+    lesson.lessonTypeId = +this.form.get("lessonTypeId").value;
 
 
     if (this.id) {
@@ -238,6 +257,14 @@ export class LessonEditComponent extends BaseFormComponent implements OnInit{
 
   set daysWeeks(value: DaysWeek[]) {
     this._daysWeeks = value;
+  }
+
+  get lessonTypes(): LessonType[] {
+    return this._lessonTypes;
+  }
+
+  set lessonTypes(value: LessonType[]) {
+    this._lessonTypes = value;
   }
 
 }

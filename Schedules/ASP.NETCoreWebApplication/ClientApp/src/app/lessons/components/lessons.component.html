@@ -73,6 +73,14 @@
     </td>
   </ng-container>
 
+  <!-- Days Week Column -->
+  <ng-container matColumnDef="lessonType">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>lesson Type</th>
+    <td mat-cell *matCellDef="let lesson">
+      <a [routerLink]="['/daysweek', lesson.lessonTypeId]">{{lesson.lessonType}}</a>
+    </td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>

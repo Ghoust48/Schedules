@@ -27,5 +27,9 @@ namespace ASP.NETCoreWebApplication.Models.DTOs
         public int DaysWeekId { get; set; }
 
         public string DaysWeek { get; set; }
+
+        public int LessonTypeId { get; set; }
+
+        public string LessonType { get; set; }
     }
 }
