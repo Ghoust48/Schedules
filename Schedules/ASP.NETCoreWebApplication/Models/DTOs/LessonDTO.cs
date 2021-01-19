@@ -21,6 +21,8 @@ namespace ASP.NETCoreWebApplication.Models.DTOs
         public int WeeksTypeId { get; set; }
 
         public string WeeksType { get; set; }
+
+        public string WeeksColor { get; set; }
         
         public int DaysWeekId { get; set; }
 

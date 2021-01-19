@@ -34,7 +34,10 @@ export class WeekstypeEditComponent extends BaseFormComponent implements OnInit 
     this.form = this._formBuilder.group({
       type: ['',
         [Validators.required]
-      ]
+      ],
+      color: ['',
+        [Validators.required]
+      ],
     });
 
     this.loadData();
@@ -67,6 +70,7 @@ export class WeekstypeEditComponent extends BaseFormComponent implements OnInit 
     let weeksType = (this.id) ? this.weeksType : <WeeksType>{};
 
     weeksType.type = this.form.get("type").value;
+    weeksType.color = this.form.get("color").value;
 
     if (this.id) {
       // EDIT mode

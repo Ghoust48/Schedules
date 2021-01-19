@@ -43,6 +43,7 @@ namespace ASP.NETCoreWebApplication.Controllers
                     EndTime = lesson.Timetable.EndTime,
                     WeeksTypeId = lesson.WeeksType.Id,
                     WeeksType = lesson.WeeksType.Type,
+                    WeeksColor = lesson.WeeksType.Color,
                     DaysWeekId = lesson.DaysWeek.Id,
                     DaysWeek = lesson.DaysWeek.Day
                 }),

@@ -108,6 +108,9 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 

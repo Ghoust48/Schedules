@@ -13,7 +13,7 @@ import {ApiResult} from "../../base.service";
 })
 export class LessonsComponent implements OnInit{
 
-  private _displayedColumns: string[] = ['id', 'name', 'auditory', 'time', 'weeksType', 'daysWeek'];
+  private _displayedColumns: string[] = ['id', 'daysWeek', 'time', 'name'];
 
   private _lessons: MatTableDataSource<Lesson>;
 
@@ -21,7 +21,7 @@ export class LessonsComponent implements OnInit{
 
   private _defaultPageSize: number = 10;
 
-  private _defaultSortColumn: string = "name";
+  private _defaultSortColumn: string = "startTime";
 
   private _defaultSortOrder: string = "asc";
 

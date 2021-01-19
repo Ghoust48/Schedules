@@ -8,6 +8,7 @@
   endTime: string;
   weeksTypeId: number;
   weeksType: string;
+  weeksColor: string;
   daysWeekId: number;
   daysWeek: string;
 }

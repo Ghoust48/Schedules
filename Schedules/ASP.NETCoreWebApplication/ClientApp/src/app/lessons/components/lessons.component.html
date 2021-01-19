@@ -32,18 +32,21 @@
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-    <td mat-cell *matCellDef="let lesson">
+    <td mat-cell *matCellDef="let lesson" [style.background]="lesson.weeksColor">
       <a [routerLink]="['/lesson', lesson.id]">{{lesson.name}}</a>
+      <br>
+      ({{lesson.auditory}})
+
     </td>
   </ng-container>
 
   <!-- auditory Column -->
-  <ng-container matColumnDef="auditory">
+  <!--<ng-container matColumnDef="auditory">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Auditory</th>
     <td mat-cell *matCellDef="let lesson">
       <a [routerLink]="['/auditory', lesson.auditoryId]">{{lesson.auditory}}</a>
     </td>
-  </ng-container>
+  </ng-container>-->
 
   <!-- time Column -->
   <ng-container matColumnDef="time">
@@ -54,12 +57,13 @@
   </ng-container>
 
   <!-- Week type Column -->
-  <ng-container matColumnDef="weeksType">
+  <!--<ng-container matColumnDef="weeksType">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Week Type</th>
     <td mat-cell *matCellDef="let lesson">
-      <a [routerLink]="['/weektype', lesson.weeksTypeId]">{{lesson.weeksType}}</a>
+      &lt;!&ndash;<a [routerLink]="['/weektype', lesson.weeksTypeId]">{{lesson.weeksType}}</a>&ndash;&gt;
+      {{lesson.weeksType}}
     </td>
-  </ng-container>
+  </ng-container>-->
 
   <!-- Days Week Column -->
   <ng-container matColumnDef="daysWeek">

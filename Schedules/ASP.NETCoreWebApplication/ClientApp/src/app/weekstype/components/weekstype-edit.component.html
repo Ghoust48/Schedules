@@ -23,6 +23,24 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <label for="color">Color:</label>
+      <br />
+      <input type="color" id="color"
+             formControlName="color" required
+             placeholder="Color..."
+             class="form-control"
+      />
+
+      <div *ngIf="form.get('color').invalid &&
+                 (form.get('color').dirty || form.get('color').touched)"
+           class="invalid-feedback">
+        <div *ngIf="form.get('color').errors?.required">
+          color is required.
+        </div>
+      </div>
+    </div>
+
     <div class="form-group commands">
       <button *ngIf="id" type="submit"
               (click)="onSubmit()"
