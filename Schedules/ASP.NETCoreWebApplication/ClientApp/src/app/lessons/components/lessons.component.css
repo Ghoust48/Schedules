@@ -3,6 +3,14 @@ table {
   //text-align: center;
 }
 
+td {
+  vertical-align: center;
+  horiz-align: center;
+  border-right: 1px solid rgba(0,0,0,.12);
+  padding-left: 16px !important;
+  padding-top: 14px !important;
+}
+
 .mat-form-field {
   font-size: 14px;
   width: 100%;

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZopsL3GBCaIKsOCJjaxoIgJBM/lma1i4wL7veUYHJmFf/+GFlPR2NqBR+6fadNDvDYJ2Jif69p4wKKdHZJVCzg==",
+  "dgSpecHash": "LJN5WoGUFlQJofkYzFZg6uSYThUreyfGXJJboTmq+heNEuJboZzhjaGo1vY3qb4nU+JOYn6+xtTvI2Q1IpceLg==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Web\\Schedule.Web.csproj",
+  "projectFilePath": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Web\\Schedule.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\islepukhin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\islepukhin\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.0\\microsoft.aspnetcore.authentication.jwtbearer.5.0.0.nupkg.sha512",

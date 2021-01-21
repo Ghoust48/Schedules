@@ -26,6 +26,6 @@
 
         public LessonType LessonType { get; set; }
 
-        public Subgroup Subgroup { get; set; }
+        public Schedule Schedule { get; set; }
     }
 }

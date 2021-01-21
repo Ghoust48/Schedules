@@ -47,7 +47,8 @@ namespace ASP.NETCoreWebApplication.Controllers
                     DaysWeekId = lesson.DaysWeek.Id,
                     DaysWeek = lesson.DaysWeek.Day,
                     LessonTypeId = lesson.LessonType.Id,
-                    LessonType = lesson.LessonType.Type
+                    LessonType = lesson.LessonType.Type,
+                    //ScheduleId = lesson.Schedule.Id
                 }),
                 pageIndex,
                 pageSize,

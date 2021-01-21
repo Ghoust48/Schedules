@@ -1,43 +1,62 @@
-<h1>Weeks type</h1>
+<h1>Schedules</h1>
 
 <p>Here's a list of countries: feel free to play with it.</p>
 
-<p *ngIf="!daysWeek"><em>Loading...</em></p>
+<p *ngIf="!schedule"><em>Loading...</em></p>
 
-<div class="commands text-right" *ngIf="daysWeek">
+<div class="commands text-right" *ngIf="schedule">
   <button type="button"
-          [routerLink]="['/daysweek']"
+          [routerLink]="['/schedule']"
           class="btn btn-success">
     Add a new weeksType
   </button>
 </div>
 
-<mat-form-field [hidden]="!daysWeek">
+<mat-form-field [hidden]="!schedule">
   <label>
     <input matInput (keyup)="loadData($event.target.value)"
            placeholder="Filter by name (or part of it)...">
   </label>
 </mat-form-field>
 
-<table mat-table [dataSource]="daysWeek" class="mat-elevation-z8" [hidden]="!daysWeek"
+<table mat-table [dataSource]="schedule" class="mat-elevation-z8" [hidden]="!schedule"
        matSort (matSortChange)="loadData()"
        matSortActive="{{defaultSortColumn}}" matSortDirection="{{defaultSortOrder}}">
 
   <!-- Id Column -->
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-    <td mat-cell *matCellDef="let daysWeek"> {{daysWeek.id}} </td>
+    <td mat-cell *matCellDef="let schedule"> {{schedule.id}} </td>
   </ng-container>
 
   <!-- Day Column -->
   <ng-container matColumnDef="day">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Day</th>
-    <td mat-cell *matCellDef="let daysWeek">
-      <a [routerLink]="['/daysweek', daysWeek.id]">{{daysWeek.day}}</a>
+    <td mat-cell *matCellDef="let schedule">
+      {{schedule.daysWeek}}
     </td>
   </ng-container>
 
-   <!--Lesson Column-->
+  <!-- time Column -->
+  <ng-container matColumnDef="time">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>time</th>
+    <td mat-cell *matCellDef="let schedule">
+      {{schedule.startTime}} - {{schedule.endTime}}
+    </td>
+  </ng-container>
+
+  <!-- Day Column -->
+  <ng-container matColumnDef="lesson">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>lesson</th>
+    <td mat-cell *matCellDef="let schedule">
+      <ng-container *ngFor="let lesson of schedule.lessons">
+        {{lesson.name}}
+        {{lesson.auditory}}
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <!--Lesson Column-->
   <!--<ng-container matColumnDef="lesson">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>lesson</th>
     &lt;!&ndash;<td mat-cell *matCellDef="let daysWeek">
@@ -58,7 +77,7 @@
 
 
 <!-- Pagination directive -->
-<mat-paginator [hidden]="!daysWeek"
+<mat-paginator [hidden]="!schedule"
                (page)="getData($event)"
                [pageSize]="10"
                [pageSizeOptions]="[10, 20, 50]"

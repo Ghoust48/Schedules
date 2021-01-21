@@ -31,5 +31,7 @@ namespace ASP.NETCoreWebApplication.Models.DTOs
         public int LessonTypeId { get; set; }
 
         public string LessonType { get; set; }
+
+        public int ScheduleId { get; set; }
     }
 }

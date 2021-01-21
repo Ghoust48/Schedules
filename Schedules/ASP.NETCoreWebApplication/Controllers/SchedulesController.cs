@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using System.Linq;
 using ASP.NETCoreWebApplication.Data;
 using ASP.NETCoreWebApplication.Models;
 using ASP.NETCoreWebApplication.Models.DTOs;
@@ -11,39 +10,32 @@ namespace ASP.NETCoreWebApplication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DaysWeeksController : ControllerBase
+    public class SchedulesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public DaysWeeksController(ApplicationDbContext context)
+        public SchedulesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/DaysWeeks
         [HttpGet]
-        public async Task<ActionResult<ApiResult<DaysWeek>>> GetDaysWeeks(int pageIndex = 0,
+        public async Task<ActionResult<ApiResult<ScheduleDTO>>> GetSchedules(int pageIndex = 0,
             int pageSize = 10,
             string sortColumn = null,
             string sortOrder = null,
             string filterColumn = null,
             string filterQuery = null)
         {
-            return await ApiResult<DaysWeek>.CreateAsync(
-                _context.DaysWeeks,
-                pageIndex,
-                pageSize,
-                sortColumn,
-                sortOrder,
-                filterColumn,
-                filterQuery);
-            
-            /*return await ApiResult<DaysWeekDTO>.CreateAsync(
-                _context.DaysWeeks.Select(week => new DaysWeekDTO
+
+            return await ApiResult<ScheduleDTO>.CreateAsync(
+                _context.Schedules.Select(schedule => new ScheduleDTO
                 {
-                    Id = week.Id,
-                    Day = week.Day,
-                    Lessons = week.Lessons.Select(lesson => new LessonDTO
+                    Id = schedule.Id,
+                    DaysWeek = schedule.DaysWeek.Day,
+                    StartTime = schedule.Timetable.StartTime,
+                    EndTime = schedule.Timetable.EndTime,
+                    Lessons = schedule.Lessons.Select(lesson => new LessonDTO
                     {
                         Id = lesson.Id,
                         Name = lesson.Name,
@@ -66,34 +58,34 @@ namespace ASP.NETCoreWebApplication.Controllers
                 sortColumn,
                 sortOrder,
                 filterColumn,
-                filterQuery);*/
+                filterQuery);
         }
 
         // GET: api/DaysWeeks/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DaysWeek>> GetDaysWeek(int id)
+        public async Task<ActionResult<Schedule>> GetSchedule(int id)
         {
-            var daysWeek = await _context.DaysWeeks.FindAsync(id);
+            var schedule = await _context.Schedules.FindAsync(id);
 
-            if (daysWeek == null)
+            if (schedule == null)
             {
                 return NotFound();
             }
 
-            return daysWeek;
+            return schedule;
         }
 
         // PUT: api/DaysWeeks/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDaysWeek(int id, DaysWeek daysWeek)
+        public async Task<IActionResult> PutSchedule(int id, Schedule schedule)
         {
-            if (id != daysWeek.Id)
+            if (id != schedule.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(daysWeek).State = EntityState.Modified;
+            _context.Entry(schedule).State = EntityState.Modified;
 
             try
             {
@@ -101,7 +93,7 @@ namespace ASP.NETCoreWebApplication.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DaysWeekExists(id))
+                if (!ScheduleExists(id))
                 {
                     return NotFound();
                 }
@@ -117,33 +109,33 @@ namespace ASP.NETCoreWebApplication.Controllers
         // POST: api/DaysWeeks
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<DaysWeek>> PostDaysWeek(DaysWeek daysWeek)
+        public async Task<ActionResult<Schedule>> PostSchedule(Schedule schedule)
         {
-            _context.DaysWeeks.Add(daysWeek);
+            _context.Schedules.Add(schedule);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDaysWeek", new { id = daysWeek.Id }, daysWeek);
+            return CreatedAtAction("GetSchedule", new { id = schedule.Id }, schedule);
         }
 
         // DELETE: api/DaysWeeks/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDaysWeek(int id)
+        public async Task<IActionResult> DeleteSchedule(int id)
         {
-            var daysWeek = await _context.DaysWeeks.FindAsync(id);
-            if (daysWeek == null)
+            var schedule = await _context.Schedules.FindAsync(id);
+            if (schedule == null)
             {
                 return NotFound();
             }
 
-            _context.DaysWeeks.Remove(daysWeek);
+            _context.Schedules.Remove(schedule);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool DaysWeekExists(int id)
+        private bool ScheduleExists(int id)
         {
-            return _context.DaysWeeks.Any(e => e.Id == id);
+            return _context.Schedules.Any(e => e.Id == id);
         }
     }
 }

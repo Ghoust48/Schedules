@@ -51,7 +51,9 @@
   <!-- time Column -->
   <ng-container matColumnDef="time">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
-    <td mat-cell *matCellDef="let lesson">
+    <td mat-cell *matCellDef="let lesson; let i = index"
+        [attr.rowspan]="getRowSpan('time', i)"
+        [style.display]="getRowSpan('time', i) ? '' : 'none'">
       <a [routerLink]="['/timetable', lesson.timetableId]">{{lesson.startTime}} - {{lesson.endTime}}</a>
     </td>
   </ng-container>
@@ -68,7 +70,9 @@
   <!-- Days Week Column -->
   <ng-container matColumnDef="daysWeek">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Day Week</th>
-    <td mat-cell *matCellDef="let lesson">
+    <td mat-cell *matCellDef="let lesson; let i = index"
+        [attr.rowspan]="getRowSpan('daysWeek', i)"
+        [style.display]="getRowSpan('daysWeek', i) ? '' : 'none'">
       <a [routerLink]="['/daysweek', lesson.daysWeekId]">{{lesson.daysWeek}}</a>
     </td>
   </ng-container>

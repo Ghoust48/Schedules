@@ -4,14 +4,16 @@ using ASP.NETCoreWebApplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ASP.NETCoreWebApplication.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210121091908_Added schedules table")]
+    partial class Addedschedulestable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,28 +34,6 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Auditories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "211А"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "212А"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "213А"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "214А"
-                        });
                 });
 
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.DaysWeek", b =>
@@ -69,38 +49,6 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DaysWeeks");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Day = "Понедельник"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Day = "Вторник"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Day = "Среда"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Day = "Четверг"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Day = "Пятница"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Day = "Суббота"
-                        });
                 });
 
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Lesson", b =>
@@ -161,18 +109,6 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LessonTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Type = "Лекция"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Type = "Практика"
-                        });
                 });
 
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Schedule", b =>
@@ -213,44 +149,6 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Timetables");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            EndTime = "10:20",
-                            StartTime = "9:00"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            EndTime = "11:50",
-                            StartTime = "10:30"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            EndTime = "13:40",
-                            StartTime = "12:20"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            EndTime = "15:10",
-                            StartTime = "13:50"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            EndTime = "16:50",
-                            StartTime = "15:30"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            EndTime = "18:20",
-                            StartTime = "17:00"
-                        });
                 });
 
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.WeeksType", b =>
@@ -269,26 +167,6 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WeeksTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Color = "#35cc5d",
-                            Type = "Зеленая"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Color = "#ffffff",
-                            Type = "Белая"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Color = "#080808",
-                            Type = "Все"
-                        });
                 });
 
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Lesson", b =>

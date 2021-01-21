@@ -12,8 +12,26 @@ import {ApiResult} from "../../base.service";
   styleUrls: ['./lessons.component.css']
 })
 export class LessonsComponent implements OnInit{
+  get spans(): any[] {
+    return this._spans;
+  }
+
+  set spans(value: any[]) {
+    this._spans = value;
+  }
+  get spanningColumns(): string[] {
+    return this._spanningColumns;
+  }
+
+  set spanningColumns(value: string[]) {
+    this._spanningColumns = value;
+  }
 
   private _displayedColumns: string[] = ['id', 'daysWeek', 'time', 'name', 'lessonType'];
+
+  private _spanningColumns = ['daysWeek', 'time'];
+
+  private _spans = [];
 
   private _lessons: MatTableDataSource<Lesson>;
 
@@ -34,10 +52,42 @@ export class LessonsComponent implements OnInit{
   @ViewChild(MatSort) private _sort: MatSort;
 
   constructor(private _lessonsService: LessonsService) {
+
   }
 
   ngOnInit() {
     this.loadData(null);
+  }
+
+  public cacheSpan(key, accessor) {
+
+    for (let i = 0; i < this.lessons.data.length;) {
+      let currentValue = accessor(this.lessons.data[i]);
+      let count = 1;
+
+      // Iterate through the remaining rows to see how many match
+      // the current value as retrieved through the accessor.
+      for (let j = i + 1; j < this.lessons.data.length; j++) {
+        if (currentValue != accessor(this.lessons.data[j])) {
+          break;
+        }
+        console.log(currentValue)
+        count++;
+      }
+
+      if (!this.spans[i]) {
+        this.spans[i] = {};
+      }
+
+      // Store the number of similar values that were found (the span)
+      // and skip i to the next unique row.
+      this.spans[i][key] = count;
+      i += count;
+    }
+  }
+
+  getRowSpan(col, index) {
+    return this.spans[index] && this.spans[index][col];
   }
 
   public loadData(query: string = null) {
@@ -81,6 +131,8 @@ export class LessonsComponent implements OnInit{
         this.paginator.pageIndex = result.pageIndex;
         this.paginator.pageSize = result.pageSize;
         this.lessons = new MatTableDataSource<Lesson>(result.data);
+        this.cacheSpan('daysWeek', d => d.daysWeek);
+        this.cacheSpan('time', d => d.daysWeek + d.time);
       }, error => console.error(error));
   }
 
