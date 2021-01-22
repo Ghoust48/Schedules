@@ -13,6 +13,8 @@ namespace ASP.NETCoreWebApplication.Models.DTOs
         public string Auditory { get; set; }
         
         public int TimetableId { get; set; }
+
+        public string FullTime { get; set; }
         
         public string StartTime { get; set; }
 

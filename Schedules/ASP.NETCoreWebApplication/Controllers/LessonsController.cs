@@ -39,6 +39,7 @@ namespace ASP.NETCoreWebApplication.Controllers
                     AuditoryId = lesson.Auditory.Id,
                     Auditory = lesson.Auditory.Name,
                     TimetableId = lesson.Timetable.Id,
+                    FullTime = $"{lesson.Timetable.StartTime} - {lesson.Timetable.EndTime}",
                     StartTime = lesson.Timetable.StartTime,
                     EndTime = lesson.Timetable.EndTime,
                     WeeksTypeId = lesson.WeeksType.Id,

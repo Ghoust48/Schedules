@@ -1,4 +1,4 @@
-﻿import {Component, OnInit, ViewChild} from "@angular/core";
+﻿import {Component, Input, OnInit, ViewChild} from "@angular/core";
 import {Lesson} from "../interfaces/lesson";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
@@ -12,24 +12,10 @@ import {ApiResult} from "../../base.service";
   styleUrls: ['./lessons.component.css']
 })
 export class LessonsComponent implements OnInit{
-  get spans(): any[] {
-    return this._spans;
-  }
 
-  set spans(value: any[]) {
-    this._spans = value;
-  }
-  get spanningColumns(): string[] {
-    return this._spanningColumns;
-  }
+  private _displayedColumns: string[] = ['daysWeek', 'fullTime', 'name', 'lessonType'];
 
-  set spanningColumns(value: string[]) {
-    this._spanningColumns = value;
-  }
-
-  private _displayedColumns: string[] = ['id', 'daysWeek', 'time', 'name', 'lessonType'];
-
-  private _spanningColumns = ['daysWeek', 'time'];
+  private _spanningColumns = ['daysWeek', 'fullTime'];
 
   private _spans = [];
 
@@ -39,13 +25,13 @@ export class LessonsComponent implements OnInit{
 
   private _defaultPageSize: number = 10;
 
-  private _defaultSortColumn: string = "startTime";
+  private _defaultSortColumn: string = "daysWeek";
 
   private _defaultSortOrder: string = "asc";
 
   private _defaultFilterColumn: string = "name";
 
-  private _filterQuery:string = null;
+  private _filterQuery: string = null;
 
   @ViewChild(MatPaginator) private _paginator: MatPaginator;
 
@@ -59,44 +45,16 @@ export class LessonsComponent implements OnInit{
     this.loadData(null);
   }
 
-  public cacheSpan(key, accessor) {
-
-    for (let i = 0; i < this.lessons.data.length;) {
-      let currentValue = accessor(this.lessons.data[i]);
-      let count = 1;
-
-      // Iterate through the remaining rows to see how many match
-      // the current value as retrieved through the accessor.
-      for (let j = i + 1; j < this.lessons.data.length; j++) {
-        if (currentValue != accessor(this.lessons.data[j])) {
-          break;
-        }
-        console.log(currentValue)
-        count++;
-      }
-
-      if (!this.spans[i]) {
-        this.spans[i] = {};
-      }
-
-      // Store the number of similar values that were found (the span)
-      // and skip i to the next unique row.
-      this.spans[i][key] = count;
-      i += count;
-    }
-  }
-
-  getRowSpan(col, index) {
-    return this.spans[index] && this.spans[index][col];
-  }
-
   public loadData(query: string = null) {
     const pageEvent = new PageEvent();
     pageEvent.pageIndex = this.defaultPageIndex;
     pageEvent.pageSize = this.defaultPageSize;
 
-    if (query) {
+    if (query !== '') {
       this.filterQuery = query;
+    }
+    else {
+      this.filterQuery = null;
     }
 
     this.getData(pageEvent);
@@ -111,11 +69,11 @@ export class LessonsComponent implements OnInit{
       ? this.sort.direction
       : this.defaultSortOrder;
 
-    const filterColumn = (this._filterQuery)
+    const filterColumn = (this.filterQuery)
       ? this.defaultFilterColumn
       : null;
 
-    const filterQuery = (this._filterQuery)
+    let filterQuery = (this.filterQuery)
       ? this.filterQuery
       : null;
 
@@ -132,8 +90,38 @@ export class LessonsComponent implements OnInit{
         this.paginator.pageSize = result.pageSize;
         this.lessons = new MatTableDataSource<Lesson>(result.data);
         this.cacheSpan('daysWeek', d => d.daysWeek);
-        this.cacheSpan('time', d => d.daysWeek + d.time);
+        this.cacheSpan('fullTime', d => d.daysWeek + d.fullTime);
       }, error => console.error(error));
+  }
+
+  public cacheSpan(key, accessor) {
+
+    for (let i = 0; i < this.lessons.data.length;) {
+      let currentValue = accessor(this.lessons.data[i]);
+      let count = 1;
+
+      // Iterate through the remaining rows to see how many match
+      // the current value as retrieved through the accessor.
+      for (let j = i + 1; j < this.lessons.data.length; j++) {
+        if (currentValue != accessor(this.lessons.data[j])) {
+          break;
+        }
+        count++;
+      }
+
+      if (!this.spans[i]) {
+        this.spans[i] = {};
+      }
+
+      // Store the number of similar values that were found (the span)
+      // and skip i to the next unique row.
+      this.spans[i][key] = count;
+      i += count;
+    }
+  }
+
+  public getRowSpan(col, index) {
+    return this.spans[index] && this.spans[index][col];
   }
 
   get defaultSortOrder(): string {
@@ -208,4 +196,19 @@ export class LessonsComponent implements OnInit{
   set paginator(value: MatPaginator) {
     this._paginator = value;
   }
+  get spans(): any[] {
+    return this._spans;
+  }
+
+  set spans(value: any[]) {
+    this._spans = value;
+  }
+  get spanningColumns(): string[] {
+    return this._spanningColumns;
+  }
+
+  set spanningColumns(value: string[]) {
+    this._spanningColumns = value;
+  }
+
 }

@@ -4,6 +4,7 @@
   auditoryId: number;
   auditory: string;
   timetableId: number;
+  fullTime: string;
   startTime: string;
   endTime: string;
   weeksTypeId: number;
