@@ -13,7 +13,11 @@ import {SchedulePageService} from "../services/schedule-page.service";
 })
 export class SchedulePageComponent implements OnInit {
 
-  private _displayedColumns: string[] = ['id', 'day', 'time', 'lesson'];
+  private _displayedColumns: string[] = ['daysWeek', 'fullTime', 'lesson', 'lessonType'];
+  private _spanningColumns = ['daysWeek', 'fullTime'];
+
+  private _spans = [];
+
   private _schedule: MatTableDataSource<Schedule>;
 
   private _defaultPageIndex: number = 0;
@@ -31,20 +35,6 @@ export class SchedulePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData(null);
-  }
-
-  casheSpan(key, accessor) {
-    /*let lessons = [];
-
-    for (let day of this.daysWeek.data) {
-      for (let lesson of day.lessons) {
-
-      }
-    }
-
-    for (let i = 0; i < this.daysWeek.data.lessons.length;) {
-
-    }*/
   }
 
   public loadData(query: string = null) {
@@ -89,8 +79,39 @@ export class SchedulePageComponent implements OnInit {
         this.paginator.pageIndex = result.pageIndex;
         this.paginator.pageSize = result.pageSize;
         this.schedule = new MatTableDataSource<Schedule>(result.data);
-        console.log(result.data)
+        this.cacheSpan('daysWeek', d => d.daysWeek);
+        this.cacheSpan('fullTime', d => d.daysWeek + d.fullTime);
       }, error => console.error(error));
+  }
+
+  public cacheSpan(key, accessor) {
+
+    for (let i = 0; i < this.schedule.data.length;) {
+      let currentValue = accessor(this.schedule.data[i]);
+      let count = 1;
+
+      // Iterate through the remaining rows to see how many match
+      // the current value as retrieved through the accessor.
+      for (let j = i + 1; j < this.schedule.data.length; j++) {
+        if (currentValue != accessor(this.schedule.data[j])) {
+          break;
+        }
+        count++;
+      }
+
+      if (!this.spans[i]) {
+        this.spans[i] = {};
+      }
+
+      // Store the number of similar values that were found (the span)
+      // and skip i to the next unique row.
+      this.spans[i][key] = count;
+      i += count;
+    }
+  }
+
+  public getRowSpan(col, index) {
+    return this.spans[index] && this.spans[index][col];
   }
 
   get sort(): MatSort {
@@ -163,5 +184,21 @@ export class SchedulePageComponent implements OnInit {
   set displayedColumns(value: string[]) {
     this._displayedColumns = value;
   }
+
+  get spanningColumns(): string[] {
+    return this._spanningColumns;
+  }
+
+  set spanningColumns(value: string[]) {
+    this._spanningColumns = value;
+  }
+  get spans(): any[] {
+    return this._spans;
+  }
+
+  set spans(value: any[]) {
+    this._spans = value;
+  }
+
 
 }

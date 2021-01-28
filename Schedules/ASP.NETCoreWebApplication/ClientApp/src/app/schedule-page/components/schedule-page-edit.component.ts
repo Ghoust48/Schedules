@@ -8,7 +8,6 @@ import {WeeksType} from "../../weekstype/interfaces/weeksType";
 import {DaysWeek} from "../../daysweek/interfaces/days-week";
 import {LessonType} from "../../lesson-type/interfaces/lesson-type";
 import {ActivatedRoute, Router} from "@angular/router";
-import {LessonsService} from "../../lessons/services/lessons.service";
 import {ApiResult} from "../../base.service";
 import {Schedule} from "../interfaces/schedule";
 import {SchedulePageService} from "../services/schedule-page.service";
@@ -28,9 +27,15 @@ export class SchedulePageEditComponent extends BaseFormComponent implements OnIn
 
   private _id?: number;
 
+  private _auditories: Auditory[];
+
   private _timetables: Timetable[];
 
+  private _weeksTypes: WeeksType[];
+
   private _daysWeeks: DaysWeek[];
+
+  private _lessonTypes: LessonType[];
 
   private _lessons: Lesson[];
 
@@ -41,16 +46,24 @@ export class SchedulePageEditComponent extends BaseFormComponent implements OnIn
 
   public ngOnInit(): void {
     this.form = new FormGroup({
+      auditoryId: new FormControl('', Validators.required),
       timetableId: new FormControl('', Validators.required),
+      weeksTypeId: new FormControl('', Validators.required),
       daysWeekId: new FormControl('', Validators.required),
+      lessonTypeId: new FormControl('', Validators.required),
+      lessonId:  new FormControl('', Validators.required),
     });
 
     this.loadData();
   }
 
   public loadData() {
+    this.loadAuditories();
     this.loadTimetables();
+    this.loadWeeksType();
     this.loadDaysWeek();
+    this.loadLessonTypes();
+    this.loadLessons();
 
     // retrieve the ID from the 'id'
     this.id = +this._activatedRoute.snapshot.paramMap.get('id');
@@ -101,12 +114,72 @@ export class SchedulePageEditComponent extends BaseFormComponent implements OnIn
     }, error => console.error(error));
   }
 
+  public loadAuditories() {
+    this._scheduleService.getChildrenByUrl<ApiResult<Auditory>>(
+      "auditories",
+      0,
+      9999,
+      "name",
+      null,
+      null,
+      null,
+    ).subscribe(result => {
+      this.auditories = result.data;
+    }, error => console.error(error));
+  }
+
+  public loadWeeksType() {
+    this._scheduleService.getChildrenByUrl<ApiResult<WeeksType>>(
+      "weekstypes",
+      0,
+      9999,
+      "type",
+      null,
+      null,
+      null,
+    ).subscribe(result => {
+      this.weeksTypes = result.data;
+    }, error => console.error(error));
+  }
+
+  public loadLessonTypes() {
+    this._scheduleService.getChildrenByUrl<ApiResult<LessonType>>(
+      "lessontypes",
+      0,
+      9999,
+      "type",
+      null,
+      null,
+      null,
+    ).subscribe(result => {
+      this.lessonTypes = result.data;
+    }, error => console.error(error));
+  }
+
+  public loadLessons() {
+    this._scheduleService.getChildrenByUrl<ApiResult<Lesson>>(
+      "lessons",
+      0,
+      9999,
+      "name",
+      null,
+      null,
+      null,
+    ).subscribe(result => {
+      this.lessons = result.data;
+    }, error => console.error(error));
+  }
+
   public onSubmit() {
 
     let schedule = (this.id) ? this.schedule : <Schedule>{};
 
+    schedule.auditoryId = +this.form.get("auditoryId").value;
     schedule.timetableId = +this.form.get("timetableId").value;
+    schedule.weeksTypeId = +this.form.get("weeksTypeId").value;
     schedule.daysWeekId = +this.form.get("daysWeekId").value;
+    schedule.lessonTypeId = +this.form.get("lessonTypeId").value;
+    schedule.lessonId = +this.form.get("lessonId").value;
 
 
     if (this.id) {
@@ -128,6 +201,7 @@ export class SchedulePageEditComponent extends BaseFormComponent implements OnIn
         .subscribe(result => {
 
           console.log("schedule " + result.id + " has been created.");
+          console.log(result)
 
           // go back to cities view
           this._router.navigate(['/schedules']);
@@ -183,5 +257,27 @@ export class SchedulePageEditComponent extends BaseFormComponent implements OnIn
 
   set title(value: string) {
     this._title = value;
+  }
+
+  get lessonTypes(): LessonType[] {
+    return this._lessonTypes;
+  }
+
+  set lessonTypes(value: LessonType[]) {
+    this._lessonTypes = value;
+  }
+  get weeksTypes(): WeeksType[] {
+    return this._weeksTypes;
+  }
+
+  set weeksTypes(value: WeeksType[]) {
+    this._weeksTypes = value;
+  }
+  get auditories(): Auditory[] {
+    return this._auditories;
+  }
+
+  set auditories(value: Auditory[]) {
+    this._auditories = value;
   }
 }

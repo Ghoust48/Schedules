@@ -23,27 +23,6 @@
        matSort (matSortChange)="loadData()"
        matSortActive="{{defaultSortColumn}}" matSortDirection="{{defaultSortOrder}}">
 
-  <!-- Days Week Column -->
-  <ng-container matColumnDef="daysWeek">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Day Week</th>
-    <td mat-cell *matCellDef="let lesson; let i = index"
-        [attr.rowspan]="getRowSpan('daysWeek', i)"
-        [style.display]="getRowSpan('daysWeek', i) ? '' : 'none'">
-      <a [routerLink]="['/daysweek', lesson.daysWeekId]">{{lesson.daysWeek}}</a>
-    </td>
-  </ng-container>
-
-
-  <!-- time Column -->
-  <ng-container matColumnDef="fullTime">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
-    <td mat-cell *matCellDef="let lesson; let i = index"
-        [attr.rowspan]="getRowSpan('fullTime', i)"
-        [style.display]="getRowSpan('fullTime', i) ? '' : 'none'">
-      <a [routerLink]="['/timetable', lesson.timetableId]">{{lesson.fullTime}}</a>
-    </td>
-  </ng-container>
-
   <!-- Id Column -->
 <!--
   <ng-container matColumnDef="id">
@@ -57,41 +36,8 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
     <td mat-cell *matCellDef="let lesson" [style.background]="lesson.weeksColor">
       <a [routerLink]="['/lesson', lesson.id]">{{lesson.name}}</a>
-      <br>
-      ({{lesson.auditory}})
-
     </td>
   </ng-container>
-
-  <!-- Days Week Column -->
-  <ng-container matColumnDef="lessonType">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>lesson Type</th>
-    <td mat-cell *matCellDef="let lesson">
-      <a [routerLink]="['/daysweek', lesson.lessonTypeId]">{{lesson.lessonType}}</a>
-    </td>
-  </ng-container>
-
-  <!-- auditory Column -->
-  <!--<ng-container matColumnDef="auditory">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Auditory</th>
-    <td mat-cell *matCellDef="let lesson">
-      <a [routerLink]="['/auditory', lesson.auditoryId]">{{lesson.auditory}}</a>
-    </td>
-  </ng-container>-->
-
-
-
-  <!-- Week type Column -->
-  <!--<ng-container matColumnDef="weeksType">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Week Type</th>
-    <td mat-cell *matCellDef="let lesson">
-      &lt;!&ndash;<a [routerLink]="['/weektype', lesson.weeksTypeId]">{{lesson.weeksType}}</a>&ndash;&gt;
-      {{lesson.weeksType}}
-    </td>
-  </ng-container>-->
-
-
-
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

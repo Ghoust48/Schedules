@@ -13,11 +13,7 @@ import {ApiResult} from "../../base.service";
 })
 export class LessonsComponent implements OnInit{
 
-  private _displayedColumns: string[] = ['daysWeek', 'fullTime', 'name', 'lessonType'];
-
-  private _spanningColumns = ['daysWeek', 'fullTime'];
-
-  private _spans = [];
+  private _displayedColumns: string[] = ['name'];
 
   private _lessons: MatTableDataSource<Lesson>;
 
@@ -25,7 +21,7 @@ export class LessonsComponent implements OnInit{
 
   private _defaultPageSize: number = 10;
 
-  private _defaultSortColumn: string = "daysWeek";
+  private _defaultSortColumn: string = "name";
 
   private _defaultSortOrder: string = "asc";
 
@@ -89,39 +85,7 @@ export class LessonsComponent implements OnInit{
         this.paginator.pageIndex = result.pageIndex;
         this.paginator.pageSize = result.pageSize;
         this.lessons = new MatTableDataSource<Lesson>(result.data);
-        this.cacheSpan('daysWeek', d => d.daysWeek);
-        this.cacheSpan('fullTime', d => d.daysWeek + d.fullTime);
       }, error => console.error(error));
-  }
-
-  public cacheSpan(key, accessor) {
-
-    for (let i = 0; i < this.lessons.data.length;) {
-      let currentValue = accessor(this.lessons.data[i]);
-      let count = 1;
-
-      // Iterate through the remaining rows to see how many match
-      // the current value as retrieved through the accessor.
-      for (let j = i + 1; j < this.lessons.data.length; j++) {
-        if (currentValue != accessor(this.lessons.data[j])) {
-          break;
-        }
-        count++;
-      }
-
-      if (!this.spans[i]) {
-        this.spans[i] = {};
-      }
-
-      // Store the number of similar values that were found (the span)
-      // and skip i to the next unique row.
-      this.spans[i][key] = count;
-      i += count;
-    }
-  }
-
-  public getRowSpan(col, index) {
-    return this.spans[index] && this.spans[index][col];
   }
 
   get defaultSortOrder(): string {
@@ -196,19 +160,4 @@ export class LessonsComponent implements OnInit{
   set paginator(value: MatPaginator) {
     this._paginator = value;
   }
-  get spans(): any[] {
-    return this._spans;
-  }
-
-  set spans(value: any[]) {
-    this._spans = value;
-  }
-  get spanningColumns(): string[] {
-    return this._spanningColumns;
-  }
-
-  set spanningColumns(value: string[]) {
-    this._spanningColumns = value;
-  }
-
 }

@@ -32,34 +32,28 @@ namespace ASP.NETCoreWebApplication.Controllers
                 _context.Schedules.Select(schedule => new ScheduleDTO
                 {
                     Id = schedule.Id,
-                    DaysWeek = schedule.DaysWeek.Day,
+                    AuditoryId = schedule.Auditory.Id,
+                    Auditory = schedule.Auditory.Name,
+                    TimetableId = schedule.Timetable.Id,
+                    FullTime = $"{schedule.Timetable.StartTime} - {schedule.Timetable.EndTime}",
                     StartTime = schedule.Timetable.StartTime,
                     EndTime = schedule.Timetable.EndTime,
-                    Lessons = schedule.Lessons.Select(lesson => new LessonDTO
-                    {
-                        Id = lesson.Id,
-                        Name = lesson.Name,
-                        AuditoryId = lesson.Auditory.Id,
-                        Auditory = lesson.Auditory.Name,
-                        TimetableId = lesson.Timetable.Id,
-                        StartTime = lesson.Timetable.StartTime,
-                        EndTime = lesson.Timetable.EndTime,
-                        WeeksTypeId = lesson.WeeksType.Id,
-                        WeeksType = lesson.WeeksType.Type,
-                        WeeksColor = lesson.WeeksType.Color,
-                        DaysWeekId = lesson.DaysWeek.Id,
-                        DaysWeek = lesson.DaysWeek.Day,
-                        LessonTypeId = lesson.LessonType.Id,
-                        LessonType = lesson.LessonType.Type
-                    })
+                    WeeksTypeId = schedule.WeeksType.Id,
+                    WeeksType = schedule.WeeksType.Type,
+                    WeeksColor = schedule.WeeksType.Color,
+                    DaysWeekId = schedule.DaysWeek.Id,
+                    DaysWeek = schedule.DaysWeek.Day,
+                    LessonTypeId = schedule.LessonType.Id,
+                    LessonType = schedule.LessonType.Type,
+                    LessonId = schedule.Lesson.Id,
+                    Lesson = schedule.Lesson.Name
                 }),
                 pageIndex,
                 pageSize,
                 sortColumn,
                 sortOrder,
                 filterColumn,
-                filterQuery);
-        }
+                filterQuery); }
 
         // GET: api/DaysWeeks/5
         [HttpGet("{id}")]

@@ -24,33 +24,15 @@ namespace ASP.NETCoreWebApplication.Controllers
 
         // GET: api/Lessons
         [HttpGet]
-        public async Task<ActionResult<ApiResult<LessonDTO>>> GetLessons(int pageIndex = 0,
+        public async Task<ActionResult<ApiResult<Lesson>>> GetLessons(int pageIndex = 0,
             int pageSize = 10,
             string sortColumn = null,
             string sortOrder = null,
             string filterColumn = null,
             string filterQuery = null)
         {
-            return await ApiResult<LessonDTO>.CreateAsync(
-                _context.Lessons.Select(lesson => new LessonDTO
-                {
-                    Id = lesson.Id,
-                    Name = lesson.Name,
-                    AuditoryId = lesson.Auditory.Id,
-                    Auditory = lesson.Auditory.Name,
-                    TimetableId = lesson.Timetable.Id,
-                    FullTime = $"{lesson.Timetable.StartTime} - {lesson.Timetable.EndTime}",
-                    StartTime = lesson.Timetable.StartTime,
-                    EndTime = lesson.Timetable.EndTime,
-                    WeeksTypeId = lesson.WeeksType.Id,
-                    WeeksType = lesson.WeeksType.Type,
-                    WeeksColor = lesson.WeeksType.Color,
-                    DaysWeekId = lesson.DaysWeek.Id,
-                    DaysWeek = lesson.DaysWeek.Day,
-                    LessonTypeId = lesson.LessonType.Id,
-                    LessonType = lesson.LessonType.Type,
-                    //ScheduleId = lesson.Schedule.Id
-                }),
+            return await ApiResult<Lesson>.CreateAsync(
+                _context.Lessons,
                 pageIndex,
                 pageSize,
                 sortColumn,
