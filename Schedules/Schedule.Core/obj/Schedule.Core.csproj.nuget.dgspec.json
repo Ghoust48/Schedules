@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj": {}
+    "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj": {
+    "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj",
+        "projectUniqueName": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj",
         "projectName": "Schedule.Core",
-        "projectPath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj",
+        "projectPath": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj",
         "packagesPath": "C:\\Users\\islepukhin\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Core\\obj\\",
+        "outputPath": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\islepukhin\\AppData\\Roaming\\NuGet\\NuGet.Config",

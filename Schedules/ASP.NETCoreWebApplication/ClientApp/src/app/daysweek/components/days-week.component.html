@@ -37,9 +37,25 @@
     </td>
   </ng-container>
 
+   <!--Lesson Column-->
+  <!--<ng-container matColumnDef="lesson">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>lesson</th>
+    &lt;!&ndash;<td mat-cell *matCellDef="let daysWeek">
+      &lt;!&ndash;<a [routerLink]="['/daysweek', daysWeek.id]">{{daysWeek.day}}</a>&ndash;&gt;
+    </td>&ndash;&gt;
+    <td mat-cell *matCellDef="let daysWeek" >
+      <ng-container *ngFor="let lesson of daysWeek.lessons">
+        {{lesson.name}}
+        {{lesson.auditory}}
+      </ng-container>
+    </td>
+  </ng-container>-->
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+
 
 <!-- Pagination directive -->
 <mat-paginator [hidden]="!daysWeek"

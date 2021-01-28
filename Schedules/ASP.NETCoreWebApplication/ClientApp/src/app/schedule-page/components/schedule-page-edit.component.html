@@ -1,0 +1,147 @@
+<div class="lesson-edit">
+  <h1>{{title}}</h1>
+
+  <p *ngIf="this.id && !schedule"><em>Loading...</em></p>
+
+  <div class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!--<label for="auditoryId">Auditory:</label>-->
+    <!--<br />-->
+    <div class="form-group">
+      <mat-form-field *ngIf="lessons" appearance="fill">
+        <mat-label>Select a lesson...</mat-label>
+        <mat-select id="lessonId" formControlName="lessonId">
+          <mat-option *ngFor="let lesson of lessons" [value]="lesson.id">
+            {{lesson.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="hasError('lessonId')"
+           class="invalid-feedback">
+        <div *ngIf="form.get('lessonId').errors?.required">
+          Please select a Lesson.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field *ngIf="auditories" appearance="fill">
+        <mat-label>Select a Auditory...</mat-label>
+        <mat-select id="auditoryId" formControlName="auditoryId">
+          <mat-option *ngFor="let auditory of auditories" [value]="auditory.id">
+            {{auditory.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="hasError('auditoryId')"
+           class="invalid-feedback">
+        <div *ngIf="form.get('auditoryId').errors?.required">
+          Please select a Auditory.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <!--<label for="auditoryId">Auditory:</label>-->
+      <!--<br />-->
+      <mat-form-field *ngIf="timetables" appearance="fill">
+        <mat-label>Select a Time...</mat-label>
+        <mat-select id="timetableId" formControlName="timetableId">
+          <mat-option *ngFor="let timetable of timetables" [value]="timetable.id">
+            {{timetable.startTime}} - {{timetable.endTime}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="hasError('timetableId')"
+           class="invalid-feedback">
+        <div *ngIf="form.get('timetableId').errors?.required">
+          Please select a time.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <!--<label for="auditoryId">Auditory:</label>-->
+      <!--<br />-->
+      <mat-form-field *ngIf="weeksTypes" appearance="fill">
+        <mat-label>Select a Weeks Type...</mat-label>
+        <mat-select id="weeksTypeId" formControlName="weeksTypeId">
+          <mat-option *ngFor="let weeksType of weeksTypes" [value]="weeksType.id">
+            {{weeksType.type}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="hasError('weeksTypeId')"
+           class="invalid-feedback">
+        <div *ngIf="form.get('weeksTypeId').errors?.required">
+          Please select a weeksType.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <!--<label for="auditoryId">Auditory:</label>-->
+      <!--<br />-->
+      <mat-form-field *ngIf="daysWeeks" appearance="fill">
+        <mat-label>Select a days Weeks...</mat-label>
+        <mat-select id="daysWeekId" formControlName="daysWeekId">
+          <mat-option *ngFor="let daysWeek of daysWeeks" [value]="daysWeek.id">
+            {{daysWeek.day}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="hasError('daysWeekId')"
+           class="invalid-feedback">
+        <div *ngIf="form.get('daysWeekId').errors?.required">
+          Please select a days Week.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <!--<label for="auditoryId">Auditory:</label>-->
+      <!--<br />-->
+      <mat-form-field *ngIf="lessonTypes" appearance="fill">
+        <mat-label>Select a lesson Type...</mat-label>
+        <mat-select id="lessonTypeId" formControlName="lessonTypeId">
+          <mat-option *ngFor="let lessonType of lessonTypes" [value]="lessonType.id">
+            {{lessonType.type}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="hasError('lessonTypeId')"
+           class="invalid-feedback">
+        <div *ngIf="form.get('lessonTypeId').errors?.required">
+          Please select a lesson Type.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group commands">
+      <button *ngIf="id" type="submit"
+              (click)="onSubmit()"
+              [disabled]="form.invalid"
+              class="btn btn-success">
+        Save
+      </button>
+      <button *ngIf="!id" type="submit"
+              (click)="onSubmit()"
+              [disabled]="form.invalid"
+              class="btn btn-success">
+        Create
+      </button>
+      <button type="button"
+              [routerLink]="['/lessons']"
+              class="btn">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Web\\Schedule.Web.csproj": {}
+    "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Web\\Schedule.Web.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj": {
+    "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj",
+        "projectUniqueName": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj",
         "projectName": "Schedule.Core",
-        "projectPath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj",
+        "projectPath": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj",
         "packagesPath": "C:\\Users\\islepukhin\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Core\\obj\\",
+        "outputPath": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\islepukhin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -58,14 +58,14 @@
         }
       }
     },
-    "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj": {
+    "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj",
+        "projectUniqueName": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj",
         "projectName": "Schedule.Infrastructure",
-        "projectPath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj",
+        "projectPath": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\islepukhin\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Infrastructure\\obj\\",
+        "outputPath": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\islepukhin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -82,8 +82,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj": {
-                "projectPath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj"
+              "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj": {
+                "projectPath": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Core\\Schedule.Core.csproj"
               }
             }
           }
@@ -142,14 +142,14 @@
         }
       }
     },
-    "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Web\\Schedule.Web.csproj": {
+    "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Web\\Schedule.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Web\\Schedule.Web.csproj",
+        "projectUniqueName": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Web\\Schedule.Web.csproj",
         "projectName": "Schedule.Web",
-        "projectPath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Web\\Schedule.Web.csproj",
+        "projectPath": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Web\\Schedule.Web.csproj",
         "packagesPath": "C:\\Users\\islepukhin\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Web\\obj\\",
+        "outputPath": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\islepukhin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -166,8 +166,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj": {
-                "projectPath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj"
+              "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj": {
+                "projectPath": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj"
               }
             }
           }

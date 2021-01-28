@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using ASP.NETCoreWebApplication.Data;
 using ASP.NETCoreWebApplication.Models;
+using ASP.NETCoreWebApplication.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,6 +37,36 @@ namespace ASP.NETCoreWebApplication.Controllers
                 sortOrder,
                 filterColumn,
                 filterQuery);
+            
+            /*return await ApiResult<DaysWeekDTO>.CreateAsync(
+                _context.DaysWeeks.Select(week => new DaysWeekDTO
+                {
+                    Id = week.Id,
+                    Day = week.Day,
+                    Lessons = week.Lessons.Select(lesson => new LessonDTO
+                    {
+                        Id = lesson.Id,
+                        Name = lesson.Name,
+                        AuditoryId = lesson.Auditory.Id,
+                        Auditory = lesson.Auditory.Name,
+                        TimetableId = lesson.Timetable.Id,
+                        StartTime = lesson.Timetable.StartTime,
+                        EndTime = lesson.Timetable.EndTime,
+                        WeeksTypeId = lesson.WeeksType.Id,
+                        WeeksType = lesson.WeeksType.Type,
+                        WeeksColor = lesson.WeeksType.Color,
+                        DaysWeekId = lesson.DaysWeek.Id,
+                        DaysWeek = lesson.DaysWeek.Day,
+                        LessonTypeId = lesson.LessonType.Id,
+                        LessonType = lesson.LessonType.Type
+                    })
+                }),
+                pageIndex,
+                pageSize,
+                sortColumn,
+                sortOrder,
+                filterColumn,
+                filterQuery);*/
         }
 
         // GET: api/DaysWeeks/5

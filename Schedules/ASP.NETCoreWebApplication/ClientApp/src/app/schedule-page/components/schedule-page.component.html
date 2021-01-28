@@ -1,0 +1,71 @@
+<h1>Schedules</h1>
+
+<p>Here's a list of countries: feel free to play with it.</p>
+
+<p *ngIf="!schedule"><em>Loading...</em></p>
+
+<div class="commands text-right" *ngIf="schedule">
+  <button type="button"
+          [routerLink]="['/schedule']"
+          class="btn btn-success">
+    Add a new weeksType
+  </button>
+</div>
+
+<mat-form-field [hidden]="!schedule">
+  <label>
+    <input matInput (keyup)="loadData($event.target.value)"
+           placeholder="Filter by name (or part of it)...">
+  </label>
+</mat-form-field>
+
+<table mat-table [dataSource]="schedule" class="mat-elevation-z8" [hidden]="!schedule"
+       matSort (matSortChange)="loadData()"
+       matSortActive="{{defaultSortColumn}}" matSortDirection="{{defaultSortOrder}}">
+
+  <!-- Days Week Column -->
+  <ng-container matColumnDef="daysWeek">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Day Week</th>
+    <td mat-cell *matCellDef="let schedule; let i = index"
+        [attr.rowspan]="getRowSpan('daysWeek', i)"
+        [style.display]="getRowSpan('daysWeek', i) ? '' : 'none'">
+      <a [routerLink]="['/daysweek', schedule.daysWeekId]">{{schedule.daysWeek}}</a>
+    </td>
+  </ng-container>
+
+  <!-- time Column -->
+  <ng-container matColumnDef="fullTime">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
+    <td mat-cell *matCellDef="let schedule; let i = index"
+        [attr.rowspan]="getRowSpan('fullTime', i)"
+        [style.display]="getRowSpan('fullTime', i) ? '' : 'none'">
+      <a [routerLink]="['/timetable', schedule.timetableId]">{{schedule.fullTime}}</a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lesson">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Lesson</th>
+    <td mat-cell *matCellDef="let schedule" [style.background] = "schedule.weeksColor !== '#000000' ? schedule.weeksColor : 'none'">
+      <a [routerLink]="['/lesson', schedule.lessonId]">{{schedule.lesson}}</a>
+      <br>
+      ({{schedule.auditory}})
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lessonType">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Lesson Type</th>
+    <td mat-cell *matCellDef="let schedule">
+      <a [routerLink]="['/lessontype', schedule.lessonTypeId]">{{schedule.lessonType}}</a>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<!-- Pagination directive -->
+<mat-paginator [hidden]="!schedule"
+               (page)="getData($event)"
+               [pageSize]="10"
+               [pageSizeOptions]="[10, 20, 50]"
+               showFirstLastButtons></mat-paginator>

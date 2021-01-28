@@ -1,4 +1,4 @@
-﻿import {Component, OnInit, ViewChild} from "@angular/core";
+﻿import {Component, Input, OnInit, ViewChild} from "@angular/core";
 import {Lesson} from "../interfaces/lesson";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
@@ -13,7 +13,7 @@ import {ApiResult} from "../../base.service";
 })
 export class LessonsComponent implements OnInit{
 
-  private _displayedColumns: string[] = ['id', 'daysWeek', 'time', 'name', 'lessonType'];
+  private _displayedColumns: string[] = ['name'];
 
   private _lessons: MatTableDataSource<Lesson>;
 
@@ -21,19 +21,20 @@ export class LessonsComponent implements OnInit{
 
   private _defaultPageSize: number = 10;
 
-  private _defaultSortColumn: string = "startTime";
+  private _defaultSortColumn: string = "name";
 
   private _defaultSortOrder: string = "asc";
 
   private _defaultFilterColumn: string = "name";
 
-  private _filterQuery:string = null;
+  private _filterQuery: string = null;
 
   @ViewChild(MatPaginator) private _paginator: MatPaginator;
 
   @ViewChild(MatSort) private _sort: MatSort;
 
   constructor(private _lessonsService: LessonsService) {
+
   }
 
   ngOnInit() {
@@ -45,8 +46,11 @@ export class LessonsComponent implements OnInit{
     pageEvent.pageIndex = this.defaultPageIndex;
     pageEvent.pageSize = this.defaultPageSize;
 
-    if (query) {
+    if (query !== '') {
       this.filterQuery = query;
+    }
+    else {
+      this.filterQuery = null;
     }
 
     this.getData(pageEvent);
@@ -61,11 +65,11 @@ export class LessonsComponent implements OnInit{
       ? this.sort.direction
       : this.defaultSortOrder;
 
-    const filterColumn = (this._filterQuery)
+    const filterColumn = (this.filterQuery)
       ? this.defaultFilterColumn
       : null;
 
-    const filterQuery = (this._filterQuery)
+    let filterQuery = (this.filterQuery)
       ? this.filterQuery
       : null;
 

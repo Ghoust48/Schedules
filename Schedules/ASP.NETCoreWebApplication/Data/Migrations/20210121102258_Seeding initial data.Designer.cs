@@ -4,14 +4,16 @@ using ASP.NETCoreWebApplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ASP.NETCoreWebApplication.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210121102258_Seeding initial data")]
+    partial class Seedinginitialdata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,22 +112,25 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("AuditoryId")
+                    b.Property<int>("AuditoryId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DaysWeekId")
+                    b.Property<int>("DaysWeekId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LessonTypeId")
+                    b.Property<int>("LessonTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TimetableId")
+                    b.Property<int?>("ScheduleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("WeeksTypeId")
+                    b.Property<int>("TimetableId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeeksTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -135,6 +140,8 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                     b.HasIndex("DaysWeekId");
 
                     b.HasIndex("LessonTypeId");
+
+                    b.HasIndex("ScheduleId");
 
                     b.HasIndex("TimetableId");
 
@@ -177,37 +184,17 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("AuditoryId")
+                    b.Property<int?>("DaysWeekId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DaysWeekId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LessonId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LessonTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TimetableId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WeeksTypeId")
+                    b.Property<int?>("TimetableId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuditoryId");
-
                     b.HasIndex("DaysWeekId");
 
-                    b.HasIndex("LessonId");
-
-                    b.HasIndex("LessonTypeId");
-
                     b.HasIndex("TimetableId");
-
-                    b.HasIndex("WeeksTypeId");
 
                     b.ToTable("Schedules");
                 });
@@ -308,59 +295,36 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
 
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Lesson", b =>
                 {
-                    b.HasOne("ASP.NETCoreWebApplication.Models.Auditory", null)
-                        .WithMany("Lessons")
-                        .HasForeignKey("AuditoryId");
-
-                    b.HasOne("ASP.NETCoreWebApplication.Models.DaysWeek", null)
-                        .WithMany("Lessons")
-                        .HasForeignKey("DaysWeekId");
-
-                    b.HasOne("ASP.NETCoreWebApplication.Models.LessonType", null)
-                        .WithMany("Lessons")
-                        .HasForeignKey("LessonTypeId");
-
-                    b.HasOne("ASP.NETCoreWebApplication.Models.Timetable", null)
-                        .WithMany("Lessons")
-                        .HasForeignKey("TimetableId");
-
-                    b.HasOne("ASP.NETCoreWebApplication.Models.WeeksType", null)
-                        .WithMany("Lessons")
-                        .HasForeignKey("WeeksTypeId");
-                });
-
-            modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Schedule", b =>
-                {
                     b.HasOne("ASP.NETCoreWebApplication.Models.Auditory", "Auditory")
-                        .WithMany()
+                        .WithMany("Lessons")
                         .HasForeignKey("AuditoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ASP.NETCoreWebApplication.Models.DaysWeek", "DaysWeek")
-                        .WithMany()
+                        .WithMany("Lessons")
                         .HasForeignKey("DaysWeekId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ASP.NETCoreWebApplication.Models.Lesson", "Lesson")
-                        .WithMany()
-                        .HasForeignKey("LessonId");
-
                     b.HasOne("ASP.NETCoreWebApplication.Models.LessonType", "LessonType")
-                        .WithMany()
+                        .WithMany("Lessons")
                         .HasForeignKey("LessonTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ASP.NETCoreWebApplication.Models.Schedule", "Schedule")
+                        .WithMany("Lessons")
+                        .HasForeignKey("ScheduleId");
+
                     b.HasOne("ASP.NETCoreWebApplication.Models.Timetable", "Timetable")
-                        .WithMany()
+                        .WithMany("Lessons")
                         .HasForeignKey("TimetableId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ASP.NETCoreWebApplication.Models.WeeksType", "WeeksType")
-                        .WithMany()
+                        .WithMany("Lessons")
                         .HasForeignKey("WeeksTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -369,13 +333,28 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
 
                     b.Navigation("DaysWeek");
 
-                    b.Navigation("Lesson");
-
                     b.Navigation("LessonType");
+
+                    b.Navigation("Schedule");
 
                     b.Navigation("Timetable");
 
                     b.Navigation("WeeksType");
+                });
+
+            modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Schedule", b =>
+                {
+                    b.HasOne("ASP.NETCoreWebApplication.Models.DaysWeek", "DaysWeek")
+                        .WithMany()
+                        .HasForeignKey("DaysWeekId");
+
+                    b.HasOne("ASP.NETCoreWebApplication.Models.Timetable", "Timetable")
+                        .WithMany()
+                        .HasForeignKey("TimetableId");
+
+                    b.Navigation("DaysWeek");
+
+                    b.Navigation("Timetable");
                 });
 
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Auditory", b =>
@@ -389,6 +368,11 @@ namespace ASP.NETCoreWebApplication.Data.Migrations
                 });
 
             modelBuilder.Entity("ASP.NETCoreWebApplication.Models.LessonType", b =>
+                {
+                    b.Navigation("Lessons");
+                });
+
+            modelBuilder.Entity("ASP.NETCoreWebApplication.Models.Schedule", b =>
                 {
                     b.Navigation("Lessons");
                 });

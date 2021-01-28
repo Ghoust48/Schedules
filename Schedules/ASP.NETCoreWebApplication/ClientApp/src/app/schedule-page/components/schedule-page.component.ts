@@ -1,36 +1,37 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-import {WeeksType} from "../../weekstype/interfaces/weeksType";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {WeekstypeService} from "../../weekstype/services/weekstype.service";
 import {ApiResult} from "../../base.service";
-import {DaysWeek} from "../interfaces/days-week";
-import {DaysWeekService} from "../services/days-week.service";
-import {LessonType} from "../../lesson-type/interfaces/lesson-type";
+import {Schedule} from "../interfaces/schedule";
+import {SchedulePageService} from "../services/schedule-page.service";
 
 @Component({
-  selector: 'app-days-week',
-  templateUrl: './days-week.component.html',
-  styleUrls: ['./days-week.component.css']
+  selector: 'app-schedule-page',
+  templateUrl: './schedule-page.component.html',
+  styleUrls: ['./schedule-page.component.css']
 })
-export class DaysWeekComponent implements OnInit {
+export class SchedulePageComponent implements OnInit {
 
-  private _displayedColumns: string[] = ['id', 'day'];
-  private _daysWeek: MatTableDataSource<DaysWeek>;
+  private _displayedColumns: string[] = ['daysWeek', 'fullTime', 'lesson', 'lessonType'];
+  private _spanningColumns = ['daysWeek', 'fullTime'];
+
+  private _spans = [];
+
+  private _schedule: MatTableDataSource<Schedule>;
 
   private _defaultPageIndex: number = 0;
   private _defaultPageSize: number = 10;
-  private _defaultSortColumn: string = "day";
+  private _defaultSortColumn: string = "daysWeek";
   private _defaultSortOrder: string = "asc";
 
-  private _defaultFilterColumn: string = "day";
+  private _defaultFilterColumn: string = "daysWeek";
   private _filterQuery: string = null;
 
   @ViewChild(MatPaginator) private _paginator: MatPaginator;
   @ViewChild(MatSort) private _sort: MatSort;
 
-  constructor(private _daysWeekService: DaysWeekService) { }
+  constructor(private _scheduleService: SchedulePageService) { }
 
   ngOnInit(): void {
     this.loadData(null);
@@ -66,7 +67,7 @@ export class DaysWeekComponent implements OnInit {
       ? this.filterQuery
       : null;
 
-    this._daysWeekService.getData<ApiResult<DaysWeek>>(
+    this._scheduleService.getData<ApiResult<Schedule>>(
       event.pageIndex,
       event.pageSize,
       sortColumn,
@@ -77,8 +78,40 @@ export class DaysWeekComponent implements OnInit {
         this.paginator.length = result.totalCount;
         this.paginator.pageIndex = result.pageIndex;
         this.paginator.pageSize = result.pageSize;
-        this.daysWeek = new MatTableDataSource<DaysWeek>(result.data);
+        this.schedule = new MatTableDataSource<Schedule>(result.data);
+        this.cacheSpan('daysWeek', d => d.daysWeek);
+        this.cacheSpan('fullTime', d => d.daysWeek + d.fullTime);
       }, error => console.error(error));
+  }
+
+  public cacheSpan(key, accessor) {
+
+    for (let i = 0; i < this.schedule.data.length;) {
+      let currentValue = accessor(this.schedule.data[i]);
+      let count = 1;
+
+      // Iterate through the remaining rows to see how many match
+      // the current value as retrieved through the accessor.
+      for (let j = i + 1; j < this.schedule.data.length; j++) {
+        if (currentValue != accessor(this.schedule.data[j])) {
+          break;
+        }
+        count++;
+      }
+
+      if (!this.spans[i]) {
+        this.spans[i] = {};
+      }
+
+      // Store the number of similar values that were found (the span)
+      // and skip i to the next unique row.
+      this.spans[i][key] = count;
+      i += count;
+    }
+  }
+
+  public getRowSpan(col, index) {
+    return this.spans[index] && this.spans[index][col];
   }
 
   get sort(): MatSort {
@@ -137,12 +170,12 @@ export class DaysWeekComponent implements OnInit {
   set defaultPageIndex(value: number) {
     this._defaultPageIndex = value;
   }
-  get daysWeek(): MatTableDataSource<DaysWeek> {
-    return this._daysWeek;
+  get schedule(): MatTableDataSource<Schedule> {
+    return this._schedule;
   }
 
-  set daysWeek(value: MatTableDataSource<DaysWeek>) {
-    this._daysWeek = value;
+  set schedule(value: MatTableDataSource<Schedule>) {
+    this._schedule = value;
   }
   get displayedColumns(): string[] {
     return this._displayedColumns;
@@ -151,4 +184,21 @@ export class DaysWeekComponent implements OnInit {
   set displayedColumns(value: string[]) {
     this._displayedColumns = value;
   }
+
+  get spanningColumns(): string[] {
+    return this._spanningColumns;
+  }
+
+  set spanningColumns(value: string[]) {
+    this._spanningColumns = value;
+  }
+  get spans(): any[] {
+    return this._spans;
+  }
+
+  set spans(value: any[]) {
+    this._spans = value;
+  }
+
+
 }

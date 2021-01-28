@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NR4I5+5SW7iN7d3kBPcvSzLj8EkpFQWzZhPAA5x8Hzg3ow1fta3Zea+UENeksRJv1+XRYi4otJ6MkRFbX8Nl0Q==",
+  "dgSpecHash": "JfdfdOXNKclEI0HDUtr6AL9Y7bGNlTOBFEAbZHmeViDSny2vEh13txT/b+d98iSRTM4tbBBzhZ45+uh54lc8Qg==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\TEMP\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj",
+  "projectFilePath": "D:\\Projects\\TEMP\\Schedules(v2)\\Schedules\\Schedules\\Schedule.Infrastructure\\Schedule.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\islepukhin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\islepukhin\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

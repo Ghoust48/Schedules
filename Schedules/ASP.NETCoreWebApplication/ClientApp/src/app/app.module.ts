@@ -22,6 +22,8 @@ import { DaysWeekComponent } from './daysweek/components/days-week.component';
 import { DaysWeekEditComponent } from './daysweek/components/days-week-edit.component';
 import { LessonTypeComponent } from './lesson-type/components/lesson-type.component';
 import { LessonTypeEditComponent } from './lesson-type/components/lesson-type-edit.component';
+import { SchedulePageComponent } from './schedule-page/components/schedule-page.component';
+import { SchedulePageEditComponent } from './schedule-page/components/schedule-page-edit.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { LessonTypeEditComponent } from './lesson-type/components/lesson-type-ed
     DaysWeekComponent,
     DaysWeekEditComponent,
     LessonTypeComponent,
-    LessonTypeEditComponent
+    LessonTypeEditComponent,
+    SchedulePageComponent,
+    SchedulePageEditComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -48,6 +52,9 @@ import { LessonTypeEditComponent } from './lesson-type/components/lesson-type-ed
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'schedules', component: SchedulePageComponent },
+      { path: 'schedule/:id', component: SchedulePageEditComponent },
+      { path: 'schedule', component: SchedulePageEditComponent },
       { path: 'auditories', component: AuditoriesComponent },
       { path: 'auditory/:id', component: AuditoryEditComponent },
       { path: 'auditory', component: AuditoryEditComponent },
